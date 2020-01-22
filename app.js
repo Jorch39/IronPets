@@ -52,7 +52,12 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 
 const index = require('./routes/index');
+const userRoutes = require('./routes/userRoutes');
+
 app.use('/', index);
+
+
+app.use('/rutasUsuario',userRoutes );
 
 const pets = require('./routes/pets');
 app.use('/listaPerritos', pets);
