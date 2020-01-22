@@ -56,7 +56,12 @@ const userRoutes = require('./routes/userRoutes');
 
 app.use('/', index);
 
+
 app.use('/rutasUsuario',userRoutes );
+
+const pets = require('./routes/pets');
+app.use('/listaPerritos', pets);
+
 
 
 module.exports = app;
