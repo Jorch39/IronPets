@@ -9,9 +9,8 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
-
 mongoose
-  .connect('mongodb://localhost/ironpets', {useNewUrlParser: true})
+  .connect('mongodb://localhost/ironPets', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -30,6 +29,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
+
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
@@ -38,6 +39,7 @@ app.use(require('node-sass-middleware')({
   sourceMap: true
 }));
       
+app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -47,21 +49,18 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Iron Pets';
 
 
 
 const index = require('./routes/index');
-const userRoutes = require('./routes/userRoutes');
+const auth = require('./routes/auth.js');
+const overview = require('./routes/overview.js');
 
 app.use('/', index);
+app.use('/auth', auth );
+app.use('/overview', overview );
 
-
-app.use('/rutasUsuario',userRoutes );
-
-const pets = require('./routes/pets');
-app.use('/listaPerritos', pets);
-
-
+app.listen(3000, ()=> console.log("Server ready, happy code :3"))
 
 module.exports = app;

@@ -1,0 +1,79 @@
+{{!< layout}}
+<form action="/overview/addPet" method="POST" >
+        <div class="form-group">
+          <input type="text" name="namePet" class="form-control" placeholder="Nombre de la mascota">
+        </div>
+        <div class="form-group">
+            <select name="specie" class="custom-select" required>
+                <option value="">Especie</option>
+                <option value="Cat">Perro</option>
+                <option value="Dog">Gato</option>
+                <option value="Other">Otro</option>
+            </select>
+            <div class="invalid-feedback">Example invalid custom select feedback</div>
+        </div>
+        <label for="validationServer01">Edad:</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="age" value="Adulto - De 3 a 6 años">
+            <label class="form-check-label" >
+                Adulto - De 3 a 6 años.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="age" value="Joven - De 1.5 a 3 años">
+            <label class="form-check-label" >
+                 Joven - De 1.5 a 3 años.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="age" value="Cachorro - De 0 a 1.5 añoss">
+            <label class="form-check-label" >
+                 Cachorro - De 0 a 1.5 años.
+            </label>
+        </div>
+   
+        <label for="validationServer01">Tamaño:</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="size"  value="Extra Grande - Más de 45 Kg">
+            <label class="form-check-label">
+                Extra Grande - Más de 45 Kg.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="size"  value="Grande - De 22 Kg. a 45 Kg">
+            <label class="form-check-label">
+                 Grande - De 22 Kg. a 45 Kg.
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="size"  value="Mediano - De 11 Kg. a 22 Kg">
+            <label class="form-check-label">
+                 Mediano - De 11 Kg. a 22 Kg.
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="size"  value="Pequeño - De 5 Kg. a 11kg.">
+            <label class="form-check-label">
+                 Pequeño - De 5 Kg. a 11kg.
+            </label>
+        </div>
+         <div class="form-check">
+            <input class="form-check-input" type="radio" name="size" value="Muy pequeño - Hasta 5 Kg.">
+            <label class="form-check-label">
+                 Muy pequeño - Hasta 5 Kg.
+            </label>
+        </div>
+        <div class="form-group">
+            <select  name="sterilized"class="custom-select" required>
+            <option value="">Esteriizado</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+            <option value="Other">Otro</option>
+            </select>
+            <div class="invalid-feedback">Example invalid custom select feedback</div>
+        </div>        
+        
+        <button type="submit" class="btn btn-primary">Crear nueva cuenta</button>
+      </form>
+
