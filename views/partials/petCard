@@ -1,0 +1,16 @@
+
+<div class="card" style="width: 33.333%;">
+  <img class="card-img" src="{{this.petImage}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{this.name}} </h5>
+    <p class="card-shelter">{{this.shelter}}</p>
+    <p class="card-breed">{{this.breed}}</p>
+    <p class="card-age">{{this.age}}</p>
+    <p class="card-size">{{this.size}}</p>
+    <p class="card-status">{{this.status}}</p>
+    <p class="card-personality">{{this.personality}}</p>
+
+  </div>
+</div>
+
+
