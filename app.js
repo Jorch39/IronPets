@@ -8,17 +8,19 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-const Pet          = require('.models/pets');
+const Pet          = require('./models/Pet');
+const User          = require('./models/User');
 const session      = require("express-session");
 const bcrypt       = require("bcrypt");
 const passport     = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const router = express.Router();
 
 
 //mongoose.Promise = Promise;
 
 mongoose
-  .connect('mongodb://localhost/ironPets', {useNewUrlParser: true})
+  .connect('mongodb+srv://userAdminJp:ironpets923@cluster0-o48uv.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -114,10 +116,10 @@ const overview = require('./routes/overview.js');
 app.use('/', index);
 //app.use('/rutasUsuario',userRoutes );
 
-const pets = require('./routes/petList');
+/* const petList = require('./routes/petList');
 app.use('/petList', pets);
 
-
+ */
 router.get("/login", (req, res, next) => {
   res.render("login");
 });

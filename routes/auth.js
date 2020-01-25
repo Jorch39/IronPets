@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user");   // User model
+const User = require("../models/User");   // User model
 const bcrypt         = require("bcrypt"); // BCrypt to encrypt passwords
 const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
+const passport = require("passport");
 
 router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
