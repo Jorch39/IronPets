@@ -15,9 +15,10 @@ const passport     = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 
-mongoose.Promise = Promise;
+//mongoose.Promise = Promise;
+
 mongoose
-  .connect('mongodb://localhost/ironpets', {useNewUrlParser: true})
+  .connect('mongodb://localhost/ironPets', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -81,6 +82,7 @@ passport.use(new LocalStrategy({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
@@ -89,29 +91,31 @@ app.use(require('node-sass-middleware')({
   sourceMap: true
 }));
       
+app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
-
+app.use(express.static('public'));
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Iron Pets';
 
 
 
 const index = require('./routes/index');
-const userRoutes = require('./routes/userRoutes');
+const auth = require('./routes/auth.js');
+const overview = require('./routes/overview.js');
 
 
 //Routes
 app.use('/', index);
-app.use('/rutasUsuario',userRoutes );
+//app.use('/rutasUsuario',userRoutes );
 
 const pets = require('./routes/petList');
-app.use('/petsList', pets);
+app.use('/petList', pets);
 
 
 router.get("/login", (req, res, next) => {
@@ -125,5 +129,9 @@ router.post("/login", passport.authenticate("local", {
   passReqToCallback: true
 }));
 
+app.use('/auth', auth );
+app.use('/overview', overview );
+
+app.listen(3000, ()=> console.log("Server ready, happy code :3"))
 
 module.exports = app;

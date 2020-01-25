@@ -1,0 +1,25 @@
+{{!< layout}}
+<div class="row">
+  <div class="col-12">
+      <form action="/auth/registerUser" method="POST" >
+        <div class="form-group">
+          <input type="text" name="nameUser" class="form-control" placeholder="Nombre">
+        </div>
+         <div class="form-group">
+          <input type="text" name="lastNameF" class="form-control" placeholder="A. paterno">
+        </div>
+         <div class="form-group">
+          <input type="text" name="lastNameM" class="form-control" placeholder="A. materno">
+        </div>
+        
+        <div class="form-group">
+          <input type="email" name="email" class="form-control" placeholder="correo electronico" aria-describedby="emailHelp">
+        </div>
+        
+        <div class="form-group">
+          <input type="password" name="password" class="form-control" placeholder="Contraseña">
+        </div>
+        <button type="submit" class="btn btn-primary">Crear nueva cuenta</button>
+      </form>
+  </div>
+</div>
