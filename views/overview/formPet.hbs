@@ -1,13 +1,13 @@
 {{!< layout}}
 <form action="/overview/addPet" method="POST" >
         <div class="form-group">
-          <input type="text" name="namePet" class="form-control" placeholder="Nombre de la mascota">
+          <input type="text" name="name" class="form-control" placeholder="Nombre de la mascota">
         </div>
         <div class="form-group">
             <select name="specie" class="custom-select" required>
                 <option value="">Especie</option>
-                <option value="Cat">Perro</option>
-                <option value="Dog">Gato</option>
+                <option value="Dog">Perro</option>
+                <option value=" Cat">Gato</option>
                 <option value="Other">Otro</option>
             </select>
             <div class="invalid-feedback">Example invalid custom select feedback</div>
