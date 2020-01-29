@@ -56,7 +56,7 @@ router.post("/signup2", (req, res, next) => {
           password: hashPass
         })
         .then(() => {
-          res.redirect("/login");
+          res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
@@ -71,7 +71,7 @@ router.post("/signup2", (req, res, next) => {
           password: hashPass
         })
         .then(() => {
-          res.redirect("/login");
+          res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
