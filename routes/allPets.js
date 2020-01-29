@@ -2,8 +2,8 @@ const express = require('express');
 const router  = express.Router();
 
 /* GET home page */
-router.get('/petList', (req, res, next) => {
-  res.render('petList');
+router.get('/allPets', (req, res, next) => {
+  res.render('allPets');
 });
 
 module.exports = router;

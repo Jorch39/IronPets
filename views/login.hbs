@@ -1,9 +1,69 @@
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '584606385421134',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v5.0'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+
+
+{
+    status: 'connected',
+    authResponse: {
+        accessToken: '...',
+        expiresIn:'...',
+        signedRequest:'...',
+        userID:'...'
+    }
+}
+
+
+
+<fb:login-button 
+  scope="public_profile,email"
+  onlogin="checkLoginState();">
+</fb:login-button>
+
+
+
+
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+
+
+
+
 
 <form action="/login" method="POST" id="form">
   <h2>Login</h2>
   <div>
-    <label for="username">Username</label>
-    <input type="text" name="username">
+    <label for="email">email</label>
+    <input type="text" name="email">
   </div>
   <div>
     <label for="password">Password</label>
@@ -12,13 +72,13 @@
   {{#if errorMessage }}
     <div class="error-message">{{ errorMessage }}</div>
   {{/if}}
+  <br>
   <div>
     <input type="submit" value="Log In">
   </div>
-  
-
   <p class="account-message">
-    Don't have an account? <a href="/signup">Sign up</a>
+    Don't have an account? <a href="/signup2">Sign up</a>
   </p>
+
 </form>
 
