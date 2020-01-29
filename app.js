@@ -8,11 +8,13 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-const Pet          = require('.models/pet');
+const Pet          = require('./models/Pet');
+const User          = require('./models/User');
 const session      = require("express-session");
 const bcrypt       = require("bcrypt");
 const passport     = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const router = express.Router();
 
 
 //mongoose.Promise = Promise;
@@ -109,10 +111,10 @@ const userRoutes = require('./routes/userRoutes');
 app.use('/', index);
 app.use('/rutasUsuario',userRoutes );
 
-const pets = require('./routes/petList');
+/* const petList = require('./routes/petList');
 app.use('/petList', pets);
 
-
+ */
 router.get("/login", (req, res, next) => {
   res.render("login");
 });
