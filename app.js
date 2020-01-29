@@ -14,13 +14,13 @@ const session      = require("express-session");
 const bcrypt       = require("bcrypt");
 const passport     = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const router = express.Router();
+//const router = express.Router();
+const MongoStore = require("connect-mongo")(session);
 
 
-//mongoose.Promise = Promise;
-
+mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb+srv://userAdminJp:ironpets923@cluster0-o48uv.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true})
+  .connect('mongodb://localhost/ironPets', {useNewUrlParser: true,  useUnifiedTopology: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -39,15 +39,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
 //Configure the express session
 app.use(session({
   secret: "our-passport-local-strategy-app",
   resave: true,
   saveUninitialized: true
 }));
-
-
 
 passport.serializeUser((user, cb) => {
   cb(null, user._id);
@@ -84,6 +81,9 @@ passport.use(new LocalStrategy({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//FB
+
+
 
 // Express View engine setup
 
@@ -107,33 +107,44 @@ app.locals.title = 'Iron Pets';
 
 
 
-const index = require('./routes/index');
+//const index = require('./routes/index');
 const auth = require('./routes/auth.js');
-const overview = require('./routes/overview.js');
+const userRoutes = require('./routes/userRoutes');
+const index = require('./routes/index');
+const overview = require('./routes/overview');
+const allPets = require('./routes/allPets')
+//const overview = require('./routes/overview.js');
 
 
 //Routes
-app.use('/', index);
+//app.use('/', index);
 //app.use('/rutasUsuario',userRoutes );
 
 /* const petList = require('./routes/petList');
 app.use('/petList', pets);
 
  */
-router.get("/login", (req, res, next) => {
-  res.render("login");
-});
+const router = require('./routes/auth');
+app.use('/', router);
 
-router.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/login",
-  failureFlash: true,
-  passReqToCallback: true
-}));
+//app.use('/', auth );
+app.use('/userRotes', userRoutes);
+//app.use('/overview', overview);
+//app.use('/', index);
+//app.use('/allPets', allPets);
 
-app.use('/auth', auth );
-app.use('/overview', overview );
 
-app.listen(3000, ()=> console.log("Server ready, happy code :3"))
+
+
+app.listen(5000, () => console.log("Server ready, happy code :3"))
 
 module.exports = app;
+
+
+//Routes
+//const router = require('./routes/auth');
+// app.use('/', router);
+
+// app.use('/', require('./routes/site-routes'));
+
+

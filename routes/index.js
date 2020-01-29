@@ -5,9 +5,5 @@ const router  = express.Router();
 router.get('/', (req, res, next) => {
   res.render('index');
 });
-router.get('/formPet' ,( req,res) =>{
-  res.render('formPet')
-})
-
 
 module.exports = router;
