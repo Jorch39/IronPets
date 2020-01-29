@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");   // User model
+const Pet = require("../models/Pet");
 const bcrypt         = require("bcrypt"); // BCrypt to encrypt passwords
 const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
@@ -168,16 +169,33 @@ router.use((req, res, next) => {
 router.get("/overview", (req, res, next) => {
   console.log(req.session.currentUser)
   console.log(`Inside overview: ${req.name}`)
-  console.log( req.session.user)
+  console.log()
   res.render("myPetList",{user: req.session.user});
 });
-
+router.get('/overview/addPet', (req,res) =>{
+  res.render('overview/formPet', {user: req.session.user})
+})
 router.get("/logout", (req, res, next) => {
   req.session.destroy((err) => {
     // cannot access session here
     res.redirect("/login");
   });
 });
+router.post('/overview/addPet', (req,res) =>{
+  const user= req.session.user;
+  console.log(user.id);
+  const {name , specie,age, size, sterilized,personality,
+    petCharacteristicsLive, petCharmyFamily,petCharmyKids,petCharmyPets,petExcersice,petSound,petBite} = req.body;
+  const newPet =  new Pet({name, specie, age,size,sterilized,personality,
+    petCharacteristicsLive, petCharmyFamily,petCharmyKids,petCharmyPets,petExcersice,petSound,petBite, status:"Disponibe", petImage:"", shelter:user.id});
+   newPet.save()
+  .then(pet =>{
+    console.log("Add new pet succefully");
+    res.redirect('/overview');
+
+  })
+  .catch(err => console.log(err)); 
+})
 
 module.exports = router;
 

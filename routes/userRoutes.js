@@ -23,14 +23,12 @@ router.use((req, res, next) => {
 //     | 
 //     V
 
-
 router.get("/overview", (req, res , next) => {
   
     res.send(req.params.newUser)
     res.render('myPetList', {user: newUser});
 
 });
-
 
 module.exports = router;
 

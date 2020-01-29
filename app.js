@@ -104,33 +104,13 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 
 //const index = require('./routes/index');
-const auth = require('./routes/auth.js');
 const userRoutes = require('./routes/userRoutes');
-const index = require('./routes/index');
-const overview = require('./routes/overview');
-const allPets = require('./routes/allPets')
-//const overview = require('./routes/overview.js');
 
-
-//Routes
-//app.use('/', index);
-//app.use('/rutasUsuario',userRoutes );
-
-//Routes
-
-/* const petList = require('./routes/petList');
-app.use('/petList', pets);
-
- */
 const router = require('./routes/auth');
+
 app.use('/', router);
 
-//app.use('/', auth );
 app.use('/userRotes', userRoutes);
-//app.use('/overview', overview);
-//app.use('/', index);
-//app.use('/allPets', allPets);
-
 
 
 
