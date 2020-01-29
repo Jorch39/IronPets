@@ -138,12 +138,3 @@ app.listen(5000, () => console.log("Server ready, happy code :3"))
 
 
 module.exports = app;
-
-
-//Routes
-//const router = require('./routes/auth');
-// app.use('/', router);
-
-// app.use('/', require('./routes/site-routes'));
-
-

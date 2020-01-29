@@ -46,30 +46,37 @@ router.post("/signup2", (req, res, next) => {
         return;
       }
       if(role==="Refugio"){
-        User.create({
+        const newUser = new User ({name, lastname,email, phone, role, direction,password: hashPass});
+     /*    User.create({
           name, 
           lastname,
           email,
           phone,
           role,
           direction,
-          password: hashPass
-        })
-        .then(() => {
+          
+        }) */
+        console.log(newUSer)
+        newUser.save()
+        .then((newUSer) => {
+          console.log(req.user)
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
         })
       }else{
-        User.create({
+        const newUser = new User ({name, lastname,email, phone, role,password: hashPass});
+
+       /*  User.create({
           name, 
           lastname,
           email,
           phone,
           role,
           password: hashPass
-        })
+        }) */
+        newUser.save()
         .then(() => {
           res.redirect("/overview");
         })
@@ -86,6 +93,7 @@ router.post("/signup2", (req, res, next) => {
 
 //Login
 router.get("/login", (req, res, next) => {
+  
   res.render("login", { "message": req.flash("error") });
 });
 
@@ -113,6 +121,7 @@ router.post("/login", (req, res, next) => {
 
   User.findOne({ "email": theEmail })
   .then(user => {
+
       if (!user) {
         res.render("login", {
           errorMessage: "The email doesn't exist."
@@ -120,8 +129,14 @@ router.post("/login", (req, res, next) => {
         return;
       }
       if (bcrypt.compareSync(thePassword, user.password)) {
+        console.log(user)
         // Save the login in the session!
         req.session.currentUser = user;
+        req.session.user = {
+          email: user.email,
+          name: user.name,
+          id: user._id
+    };
         res.redirect("/overview");
       } else {
         res.render("login", {
@@ -151,7 +166,10 @@ router.use((req, res, next) => {
 //     | 
 //     V
 router.get("/overview", (req, res, next) => {
-  res.render("myPetList");
+  console.log(req.session.currentUser)
+  console.log(`Inside overview: ${req.name}`)
+  console.log( req.session.user)
+  res.render("myPetList",{user: req.session.user});
 });
 
 router.get("/logout", (req, res, next) => {
