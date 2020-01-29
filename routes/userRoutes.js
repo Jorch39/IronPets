@@ -2,10 +2,6 @@ const express = require("express");
 const router = express.Router();
 const ensureLogin = require("connect-ensure-login");
 
-// router.get("/", (req, res, next) => {
-//   res.render("home");
-// });
-
 
 // router.get('/allPets', (req, res, next) => {
 //   res.render('allPets');
@@ -28,10 +24,6 @@ router.get("/overview", (req, res, next) => {
   res.render("myPetList");
 });
 
-
-// router.get("/overview", ensureLogin.ensureLoggedIn(), (req, res) => {
-//   res.render("myPetList", { user: req.user });
-// });
 
 module.exports = router;
 

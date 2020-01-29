@@ -25,10 +25,8 @@ router.get("/signup2", (req, res, next) => {
 });
 
 router.post("/signup2", (req, res, next) => {
-  const name = req.body.name;
-  const lastname = req.body.lastname;
-  const email = req.body.email;
-  const password = req.body.password;
+  const {name, lastname,email,phone,password,role,direction} = req.body;
+  console.log(req.body);
   const salt     = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 
@@ -47,19 +45,39 @@ router.post("/signup2", (req, res, next) => {
         });
         return;
       }
-
-      User.create({
-        name, 
-        lastname,
-        email,
-        password: hashPass
-      })
-      .then(() => {
-        res.redirect("/login");
-      })
-      .catch(error => {
-        console.log(error);
-      })
+      if(role==="Refugio"){
+        User.create({
+          name, 
+          lastname,
+          email,
+          phone,
+          role,
+          direction,
+          password: hashPass
+        })
+        .then(() => {
+          res.redirect("/login");
+        })
+        .catch(error => {
+          console.log(error);
+        })
+      }else{
+        User.create({
+          name, 
+          lastname,
+          email,
+          phone,
+          role,
+          password: hashPass
+        })
+        .then(() => {
+          res.redirect("/login");
+        })
+        .catch(error => {
+          console.log(error);
+        })
+      }
+      
   })
   .catch(error => {
     next(error);
