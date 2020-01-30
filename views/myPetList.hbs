@@ -4,11 +4,11 @@
   <h1>Bienvenido {{user.name}}</h1>
 
     <h2>Pets dadas en adopción</h2>
-
-    <ol>
-      <li>Perrito 1</li>
-      <li>Perrito 2</li>
-    </ol>
+     <div class= 'cards-container' >
+	  {{#each petList}}
+	    {{> petCard this }}
+	  {{/each}} 
+	</div>
   <a href="/overview/addPet" class="button">Dar en adopción</a>
   </div>
   <div id="container">

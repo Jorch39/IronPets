@@ -48,11 +48,11 @@ a {
 .cards-container {
   display: flex;
   padding: 10% 20%;
-  justify-content: space-around;
-}
+  justify-content: space-around; }
 
 .cards-container img {
   object-fit: cover;
   object-position: center;
-  height: 300px;
-}
+  height: 300px; }
+
+/*# sourceMappingURL=style.css.map */

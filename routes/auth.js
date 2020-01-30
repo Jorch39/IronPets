@@ -1,13 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");   // User model
-const Pet = require("../models/Pet");
 const bcrypt         = require("bcrypt"); // BCrypt to encrypt passwords
 const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
 
-
-//Register partials
+//Models
+const User = require("../models/User");   // User model
+const Pet = require("../models/Pet");
 
 
 router.get("/", (req, res, next) => {
@@ -175,7 +174,15 @@ router.use((req, res, next) => {
 //     | 
 //     V
 router.get("/overview", (req, res, next) => {
-  res.render("myPetList",{user: req.session.user});
+  const idUser = req.session.user.id;
+  console.log(idUser)
+   Pet.find({'shelter':idUser})
+   .then(petList =>{
+      console.log(petList);
+      res.render("myPetList",{user: req.session.user , petList : petList});
+   })
+   .catch(err => console.log("And error was happend x.x"))
+
 });
 router.get('/overview/addPet', (req,res) =>{
   res.render('overview/formPet', {user: req.session.user})
