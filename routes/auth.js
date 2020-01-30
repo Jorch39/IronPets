@@ -7,13 +7,21 @@ const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
 
 
+//Register partials
+
+
 router.get("/", (req, res, next) => {
   res.render("index");
 });
 
 
 router.get('/allPets', (req, res, next) => {
-  res.render('allPets');
+  Pet.find()
+  .then(allPets =>{
+    res.render('allPets', {allPets : allPets})
+    //console.log(allPets)
+  })
+  //res.render('allPets');
 });
 
 router.get('/findPets', (req, res, next) => {
@@ -167,9 +175,6 @@ router.use((req, res, next) => {
 //     | 
 //     V
 router.get("/overview", (req, res, next) => {
-  console.log(req.session.currentUser)
-  console.log(`Inside overview: ${req.name}`)
-  console.log()
   res.render("myPetList",{user: req.session.user});
 });
 router.get('/overview/addPet', (req,res) =>{
