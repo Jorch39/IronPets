@@ -1,12 +1,32 @@
-
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0px 5%;
 }
 
 a {
   color: #00B7FF;
 }
+
+nav {
+	position: fixed;
+	height: 100px;
+}
+
+// .navbar-nav {
+//   display: flex;
+//   padding: 10% 20%;
+//   justify-content: space-around;
+// }
+
+.cdmx-info h2 {
+  padding-top: 50px;
+}
+
+.cdmx-info p {
+  padding-top: 20px;
+}
+
+
 
 
 #form {
