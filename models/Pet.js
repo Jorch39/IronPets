@@ -15,7 +15,7 @@ const pet = new Schema({
   petExcersice : {type: String, required:true, maxlength:100 , trim:true},
   petSound : {type: String, required:true, maxlength:100 , trim:true},
   petBite : {type: String, required:true, maxlength:100 , trim:true},
-  created: { type: Date,default: Date.now },
+  //created: { type: Date,default: Date.now },
   status: String,
   petImage: String,
   shelter: String
