@@ -22,6 +22,23 @@ router.get('/allPets', (req, res, next) => {
   })
   //res.render('allPets');
 });
+router.get('/allPets/:id', (req, res, next) => {
+  
+  console.log("detail pet")
+  Pet.findById(req.params.id)
+  .populate("shelter")
+  .then(pet =>{
+    console.log(pet);
+    res.render('detail-pet', {petDetails : pet})
+  })
+  .catch(err => console.log(err))
+   /*  Pet.find()
+  .then(allPets =>{
+    res.render('allPets', {allPets : allPets})
+    console.log(allPets)
+  }) */
+ 
+});
 
 router.get('/findPets', (req, res, next) => {
   res.render('findPets');
@@ -64,7 +81,7 @@ router.post("/signup2", (req, res, next) => {
           direction,
           
         }) */
-        console.log(newUSer)
+        console.log(newUser)
         newUser.save()
         .then((newUSer) => {
           console.log(req.user)
@@ -196,10 +213,8 @@ router.get("/logout", (req, res, next) => {
 router.post('/overview/addPet', (req,res) =>{
   const user= req.session.user;
   console.log(user.id);
-  const {name , specie,age, size, sterilized,personality,
-    petCharacteristicsLive, petCharmyFamily,petCharmyKids,petCharmyPets,petExcersice,petSound,petBite} = req.body;
-  const newPet =  new Pet({name, specie, age,size,sterilized,personality,
-    petCharacteristicsLive, petCharmyFamily,petCharmyKids,petCharmyPets,petExcersice,petSound,petBite, status:"Disponibe", petImage:"", shelter:user.id});
+  const {name , specie,age, size, sterilized} = req.body;
+  const newPet =  new Pet({name, specie, age,size,sterilized, status:"Disponibe", petImage:"", shelter:user.id});
    newPet.save()
   .then(pet =>{
     console.log("Add new pet succefully");
