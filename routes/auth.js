@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");   // User model
 const bcrypt         = require("bcrypt"); // BCrypt to encrypt passwords
 const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
+
+//Models
+const User = require("../models/User");   // User model
+const Pet = require("../models/Pet");
 
 
 router.get("/", (req, res, next) => {
@@ -12,7 +15,12 @@ router.get("/", (req, res, next) => {
 
 
 router.get('/allPets', (req, res, next) => {
-  res.render('allPets');
+  Pet.find()
+  .then(allPets =>{
+    res.render('allPets', {allPets : allPets})
+    //console.log(allPets)
+  })
+  //res.render('allPets');
 });
 
 router.get('/findPets', (req, res, next) => {
@@ -25,10 +33,8 @@ router.get("/signup2", (req, res, next) => {
 });
 
 router.post("/signup2", (req, res, next) => {
-  const name = req.body.name;
-  const lastname = req.body.lastname;
-  const email = req.body.email;
-  const password = req.body.password;
+  const {name, lastname,email,phone,password,role,direction} = req.body;
+  console.log(req.body);
   const salt     = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 
@@ -47,19 +53,46 @@ router.post("/signup2", (req, res, next) => {
         });
         return;
       }
+      if(role==="Refugio"){
+        const newUser = new User ({name, lastname,email, phone, role, direction,password: hashPass});
+     /*    User.create({
+          name, 
+          lastname,
+          email,
+          phone,
+          role,
+          direction,
+          
+        }) */
+        console.log(newUSer)
+        newUser.save()
+        .then((newUSer) => {
+          console.log(req.user)
+          res.redirect("/overview");
+        })
+        .catch(error => {
+          console.log(error);
+        })
+      }else{
+        const newUser = new User ({name, lastname,email, phone, role,password: hashPass});
 
-      User.create({
-        name, 
-        lastname,
-        email,
-        password: hashPass
-      })
-      .then(() => {
-        res.redirect("/login");
-      })
-      .catch(error => {
-        console.log(error);
-      })
+       /*  User.create({
+          name, 
+          lastname,
+          email,
+          phone,
+          role,
+          password: hashPass
+        }) */
+        newUser.save()
+        .then(() => {
+          res.redirect("/overview");
+        })
+        .catch(error => {
+          console.log(error);
+        })
+      }
+      
   })
   .catch(error => {
     next(error);
@@ -68,6 +101,7 @@ router.post("/signup2", (req, res, next) => {
 
 //Login
 router.get("/login", (req, res, next) => {
+  
   res.render("login", { "message": req.flash("error") });
 });
 
@@ -95,6 +129,7 @@ router.post("/login", (req, res, next) => {
 
   User.findOne({ "email": theEmail })
   .then(user => {
+
       if (!user) {
         res.render("login", {
           errorMessage: "The email doesn't exist."
@@ -102,8 +137,14 @@ router.post("/login", (req, res, next) => {
         return;
       }
       if (bcrypt.compareSync(thePassword, user.password)) {
+        console.log(user)
         // Save the login in the session!
         req.session.currentUser = user;
+        req.session.user = {
+          email: user.email,
+          name: user.name,
+          id: user._id
+    };
         res.redirect("/overview");
       } else {
         res.render("login", {
@@ -133,15 +174,40 @@ router.use((req, res, next) => {
 //     | 
 //     V
 router.get("/overview", (req, res, next) => {
-  res.render("myPetList");
-});
+  const idUser = req.session.user.id;
+  console.log(idUser)
+   Pet.find({'shelter':idUser})
+   .then(petList =>{
+      console.log(petList);
+      res.render("myPetList",{user: req.session.user , petList : petList});
+   })
+   .catch(err => console.log("And error was happend x.x"))
 
+});
+router.get('/overview/addPet', (req,res) =>{
+  res.render('overview/formPet', {user: req.session.user})
+})
 router.get("/logout", (req, res, next) => {
   req.session.destroy((err) => {
     // cannot access session here
     res.redirect("/login");
   });
 });
+router.post('/overview/addPet', (req,res) =>{
+  const user= req.session.user;
+  console.log(user.id);
+  const {name , specie,age, size, sterilized,personality,
+    petCharacteristicsLive, petCharmyFamily,petCharmyKids,petCharmyPets,petExcersice,petSound,petBite} = req.body;
+  const newPet =  new Pet({name, specie, age,size,sterilized,personality,
+    petCharacteristicsLive, petCharmyFamily,petCharmyKids,petCharmyPets,petExcersice,petSound,petBite, status:"Disponibe", petImage:"", shelter:user.id});
+   newPet.save()
+  .then(pet =>{
+    console.log("Add new pet succefully");
+    res.redirect('/overview');
+
+  })
+  .catch(err => console.log(err)); 
+})
 
 module.exports = router;
 

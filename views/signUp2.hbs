@@ -1,24 +1,46 @@
 
-<form id="form" action="/signup2" method="POST">
-  <h2>Create an account</h2>
-  <label for="name"></label>
-  <input type="text" name="name" placeholder="Nombre(s)">
-  <label for="lastname"></label>
-  <input type="text" name="lastname" placeholder="Apellido(s)">
-  <label for="email"></label>
-  <input type="text" name="email" placeholder="Correo electrónico">
-  <label for="password"></label>
-  <input type="password" name="password" placeholder="********">
-  <br>
-  <br>
-  <input type="submit">Create account</input>
-    {{#if errorMessage}}
-      <div class="error-message">{{ errorMessage }}</div>
-    {{/if}}
-  <br>
-  <p class="account-message">
-    Already have an account? <a href="/login">Log in</a>
-  </p>
-</form>
+<div class="row">
+  <div class="col-md-12">
+    <form id="form" action="/signup2" method="POST">
+      <h2>Create an account</h2>
+      <div class="form-group">
+        <input type="text" name="name" class="form-control" placeholder="Nombre(s)">
+      </div>
+      <div class="form-group">
+        <input type="text" name="lastname" class="form-control" placeholder="Apellido(s)">
+      </div>
+      <div class="form-group">
+          <input type="email" name="email" class="form-control" placeholder="Correo electronico" aria-describedby="emailHelp">
+      </div>  
+      <div class="form-group">
+        <input type="number" name="phone" class="form-control" placeholder="Télefono"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" class="form-control" placeholder="Contraseña">
+      </div>
+      <div class="form-group">
+          <select id="userType" name="role" class="custom-select" required>
+                <option value="">Soy:</option>
+                <option value="ironSaver">ironSaver</option>
+                <option value="Refugio">Refugio</option>
+            </select>
+        </div>
+         <div id="Refugio" class="form-group direction" style="display:none">
+          <input type="text" name="direction" class="form-control" placeholder="Dirección del refugio" >
+        </div>
+      <br>
+      <br>
+      <input type="submit">Crear cuenta</input>
+        {{#if errorMessage}}
+          <div class="error-message">{{ errorMessage }}</div>
+        {{/if}}
+      <br>
+      <p class="account-message">
+         Ya tienes una cuenta? <a href="/login">Log in</a>
+      </p>
+    </form>
+  </div>
+</div>
+
   
 
