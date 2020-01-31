@@ -96,6 +96,7 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
+hbs.registerPartials(__dirname + '/views/partials');
 
 
 // default value for title local
@@ -104,33 +105,13 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 
 //const index = require('./routes/index');
-const auth = require('./routes/auth.js');
 const userRoutes = require('./routes/userRoutes');
-const index = require('./routes/index');
-const overview = require('./routes/overview');
-const allPets = require('./routes/allPets')
-//const overview = require('./routes/overview.js');
 
-
-//Routes
-//app.use('/', index);
-//app.use('/rutasUsuario',userRoutes );
-
-//Routes
-
-/* const petList = require('./routes/petList');
-app.use('/petList', pets);
-
- */
 const router = require('./routes/auth');
+
 app.use('/', router);
 
-//app.use('/', auth );
 app.use('/userRotes', userRoutes);
-//app.use('/overview', overview);
-//app.use('/', index);
-//app.use('/allPets', allPets);
-
 
 
 
@@ -138,12 +119,3 @@ app.listen(5000, () => console.log("Server ready, happy code :3"))
 
 
 module.exports = app;
-
-
-//Routes
-//const router = require('./routes/auth');
-// app.use('/', router);
-
-// app.use('/', require('./routes/site-routes'));
-
-
