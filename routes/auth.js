@@ -45,7 +45,7 @@ router.get('/allPets/:id', (req, res, next) => {
 });
 
 router.post('/send-email', (req, res, next) => {
-  let { email, phone,subject, message } = req.body;
+  let { email,emailShelter, phone,subject, message } = req.body;
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -55,7 +55,7 @@ router.post('/send-email', (req, res, next) => {
   });
   transporter.sendMail({
     from: '"ironPets 👻" <myawesome@project.com>',
-    to: email, 
+    to: emailShelter, 
     subject: subject, 
     text: message,
     html: `Alguien está interesado en tu mascota contactalo al email ${email} y al telefono ${phone}<b>${message}</b>`
@@ -139,6 +139,10 @@ router.post("/signup2", (req, res, next) => {
 
 //Login
 router.get("/login", (req, res, next) => {
+
+  if(req.session.user){
+    return res.redirect('/overview');
+  }
   
   res.render("login", { "message": req.flash("error") });
 });

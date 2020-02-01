@@ -20,7 +20,9 @@
             <a class="nav-item nav-link" href="/allPets">Adopta</a>
             <a class="nav-item nav-link" href="/overview">Registra</a>
             <a class="nav-item nav-link" href="/findPets">Ubica</a>
-            <a class="nav-item nav-link" href="/login">Login</a>         
+            {{#unless user}}
+            <a class="nav-item nav-link" href="/login">Login</a>
+            {{/unless}}       
           </div>
         </div>
       </nav>  

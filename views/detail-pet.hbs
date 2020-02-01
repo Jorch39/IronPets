@@ -13,10 +13,13 @@
     <p>Edad:{{petDetails.age}}</p>
     <p>Tamaño: {{petDetails.size}}</p>
     <p>ironSaver/Refugio: {{petDetails.shelter.role}}</p>
+
+
     <button class="btn btn-primary" id="formButton">Adoptar</button>
     <p>Escribele un mensaje a {{petDetails.shelter.name}}  para que sepa que estas interesado a adoptar a {{petDetails.name}}</p>
     <p>Ingresa un email y un telefono de contacto para que se puedan poner en contacto contigo</p>
     <form id="form1"action="/send-email" method="post">
+      <input type="hidden" name="emailShelter" id="" value="{{petDetails.shelter.email}}">
       <label for="">Email de contacto</label>
       <input type="email" name="email" id="" value="">
       <label for="">Telefono de contacto</label>
