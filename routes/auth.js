@@ -62,6 +62,7 @@ router.post('/send-email', (req, res, next) => {
   })
   .then(info => res.render('message', {email, subject, message, info}))
   .catch(error => console.log(error));
+});
 router.get('/findPets', (req, res, next) => {
   res.render('findPets');
 });
@@ -249,4 +250,3 @@ router.get("/logout", (req, res, next) => {
 });
 
 module.exports = router;
-
