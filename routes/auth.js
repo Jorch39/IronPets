@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt         = require("bcrypt"); // BCrypt to encrypt passwords
 const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
+const nodemailer = require('nodemailer')
 
 //Models
 const User = require("../models/User");   // User model
@@ -39,11 +40,25 @@ router.get('/allPets/:id', (req, res, next) => {
   }) */
  
 });
-
-router.get('/findPets', (req, res, next) => {
-  res.render('findPets');
+router.post('/send-email', (req, res, next) => {
+  let { email, phone,subject, message } = req.body;
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'ironpetsmexico@gmail.com',
+      pass: 'Iron12345678'
+    }
+  });
+  transporter.sendMail({
+    from: '"ironPets 👻" <myawesome@project.com>',
+    to: email, 
+    subject: subject, 
+    text: message,
+    html: `Alguien está interesado en tu mascota contactalo al email ${email} y al telefono ${phone}<b>${message}</b>`
+  })
+  .then(info => res.render('message', {email, subject, message, info}))
+  .catch(error => console.log(error));
 });
-
 //SignUp
 router.get("/signup2", (req, res, next) => {
   res.render("signUp2");

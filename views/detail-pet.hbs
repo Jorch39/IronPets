@@ -1,7 +1,7 @@
 <div class="detail-pet">
   <div class="row">
   <div class="col-md-12">
-    <h2>Ayuda a PEtNAme a tener una nueva historia, adóptalo</h2>
+    <h2>Ayuda a {{petDetails.name}} a tener una nueva historia, adóptalo</h2>
   </div>
 </div>
 <div class="row">
@@ -13,8 +13,20 @@
     <p>Edad:{{petDetails.age}}</p>
     <p>Tamaño: {{petDetails.size}}</p>
     <p>ironSaver/Refugio: {{petDetails.shelter.role}}</p>
-    <a href="/" class="btn btn-primary">Adoptar</a>
-
+    <button class="btn btn-primary" id="formButton">Adoptar</button>
+    <p>Escribele un mensaje a {{petDetails.shelter.name}}  para que sepa que estas interesado a adoptar a {{petDetails.name}}</p>
+    <p>Ingresa un email y un telefono de contacto para que se puedan poner en contacto contigo</p>
+    <form id="form1"action="/send-email" method="post">
+      <label for="">Email de contacto</label>
+      <input type="email" name="email" id="" value="">
+      <label for="">Telefono de contacto</label>
+      <input type="number" name="phone" id="" value="">
+      <label for="">Subject</label>
+      <input type="text" name="subject" id="" value="petAdoption">
+      <label for="">Message</label>
+      <textarea type="text" name="message" id=""></textarea>
+      <button type="submit">Postularse</button>
+    </form>
   </div>
 </div>
 </div>
