@@ -8,7 +8,8 @@ const pet = new Schema({
   size: { type : String, required: true , maxlength: 100 , trim: true},
   sterilized : { type : String, required: true , maxlength: 10 , trim: true},
   status: String,
-  petImage: String,
+  petImgName: String,
+  petPath: String,
   shelter: { type : Schema.Types.ObjectId, ref: 'User' } 
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
