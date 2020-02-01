@@ -1,14 +1,14 @@
 <div class="col-md-3">
   <div class="card" >
-    <img src="/images/pet_1.jpg" class="card-img-top">
+    {{!-- <img src="/images/pet_1.jpg" class="card-img-top"> --}}
+    <img src="{{this.petPath}}" alt="">
 
-  <div class="card-body">
-    <h5 class="card-title">{{this.name}} </h5>
-    <p>{{this.status}}</p>
-    <a href="/allPets/{{this._id}}" class="btn btn-primary">Ver más</a>
+    <div class="card-body">
+      <h5 class="card-title">{{this.name}} </h5>
+      <p>{{this.status}}</p>
+      <a href="/allPets/{{this._id}}" class="btn btn-primary">Ver más</a>
 
+    </div>
   </div>
 </div>
 
-
-</div>

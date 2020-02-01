@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt         = require("bcrypt"); // BCrypt to encrypt passwords
 const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
+const uploadCloud = require('../config/cloudinary.js');
 
 //Models
 const User = require("../models/User");   // User model
@@ -22,6 +23,7 @@ router.get('/allPets', (req, res, next) => {
   })
   //res.render('allPets');
 });
+
 router.get('/allPets/:id', (req, res, next) => {
   
   console.log("detail pet")
@@ -39,7 +41,6 @@ router.get('/allPets/:id', (req, res, next) => {
   }) */
  
 });
-
 router.get('/findPets', (req, res, next) => {
   res.render('findPets');
 });
@@ -81,7 +82,6 @@ router.post("/signup2", (req, res, next) => {
           direction,
           
         }) */
-        console.log(newUser)
         newUser.save()
         .then((newUSer) => {
           console.log(req.user)
@@ -196,35 +196,37 @@ router.get("/overview", (req, res, next) => {
    Pet.find({'shelter':idUser})
    .then(petList =>{
       console.log(petList);
-      res.render("myPetList",{user: req.session.user , petList : petList});
+      res.render("myPetList", {user: req.session.user , petList : petList});
    })
-   .catch(err => console.log("And error was happend x.x"))
+   .catch(err => console.log("And error ocurred x.x"))
 
 });
 router.get('/overview/addPet', (req,res) =>{
   res.render('overview/formPet', {user: req.session.user})
 })
-router.get("/logout", (req, res, next) => {
-  req.session.destroy((err) => {
-    // cannot access session here
-    res.redirect("/login");
-  });
-});
-router.post('/overview/addPet', (req,res) =>{
+
+router.post('/overview/addPet', uploadCloud.single('photo'), (req,res,next) =>{
   const user= req.session.user;
   console.log(user.id);
-  const {name , specie,age, size, sterilized} = req.body;
-  const newPet =  new Pet({name, specie, age,size,sterilized, status:"Disponibe", petImage:"", shelter:user.id});
+  const {name, specie, age, size, sterilized, shelter} = req.body;
+  const petPath = req.file.url;
+  const petImgName = req.file.originalname;
+  const newPet =  new Pet({name, specie, age, size,sterilized, status:"Disponibe", petPath, petImgName, shelter:user.id});
    newPet.save()
   .then(pet =>{
-    console.log("Add new pet succefully");
+    console.log("New pet succefully added");
     res.redirect('/overview');
 
   })
   .catch(err => console.log(err)); 
 })
 
+router.get("/logout", (req, res, next) => {
+  req.session.destroy((err) => {
+    // cannot access session here
+    res.redirect("/login");
+  });
+});
+
 module.exports = router;
-
-
 

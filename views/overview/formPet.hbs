@@ -1,5 +1,5 @@
 {{!< layout}}
-<form action="/overview/addPet" method="POST" >
+<form action="/overview/addPet" method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <input type="text" name="name" class="form-control" placeholder="Nombre de la mascota">
         </div>
@@ -66,13 +66,17 @@
         </div>
         <div class="form-group">
             <select  name="sterilized"class="custom-select" required>
-            <option value="">Esteriizado</option>
+            <option value="">Esterilizado</option>
             <option value="Si">Si</option>
             <option value="No">No</option>
             <option value="Other">Otro</option>
             </select>
             <div class="invalid-feedback">Example invalid custom select feedback</div>
         </div> 
+        <div>
+            <label></label>
+            <input type="file" name="photo">
+        </div>
     
-        <button type="submit" class="btn btn-primary">Crear nueva cuenta</button>
+        <button type="submit" class="btn btn-primary">Añadir nueva mascota</button>
       </form>
