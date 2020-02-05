@@ -180,7 +180,7 @@ nav {
 /*# sourceMappingURL=style.css.map */
 .cards-container {
   display: flex;
-  padding: 10% 20%;
+  padding: 15px 20px;
   justify-content: space-around; }
 
 .cards-container img {
