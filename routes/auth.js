@@ -27,7 +27,7 @@ router.get('/allPets', (req, res, next) => {
 });
 
 router.get('/allPets/:id', (req, res, next) => {
-  
+
   console.log("detail pet")
   Pet.findById(req.params.id)
   .populate("shelter")
@@ -43,6 +43,7 @@ router.get('/allPets/:id', (req, res, next) => {
   }) */
  
 });
+
 
 router.post('/send-email', (req, res, next) => {
   let { email,emailShelter, phone,subject, message } = req.body;
@@ -63,9 +64,11 @@ router.post('/send-email', (req, res, next) => {
   .then(info => res.render('message', {email, subject, message, info}))
   .catch(error => console.log(error));
 });
+
 router.get('/findPets', (req, res, next) => {
   res.render('findPets');
 });
+
 //SignUp
 router.get("/signup2", (req, res, next) => {
   res.render("signUp2");
@@ -139,11 +142,9 @@ router.post("/signup2", (req, res, next) => {
 
 //Login
 router.get("/login", (req, res, next) => {
-
   if(req.session.user){
     return res.redirect('/overview');
   }
-  
   res.render("login", { "message": req.flash("error") });
 });
 
@@ -224,8 +225,8 @@ router.get("/overview", (req, res, next) => {
       res.render("myPetList", {user: req.session.user , petList : petList});
    })
    .catch(err => console.log("And error ocurred x.x"))
-
 });
+
 router.get('/overview/addPet', (req,res) =>{
   res.render('overview/formPet', {user: req.session.user})
 })

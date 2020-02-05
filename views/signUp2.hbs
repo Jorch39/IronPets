@@ -1,24 +1,27 @@
 
 <div class="row">
-  <div class="col-md-12">
-    <form id="form" action="/signup2" method="POST">
-      <h2>Create an account</h2>
-      <div class="form-group">
-        <input type="text" name="name" class="form-control" placeholder="Nombre(s)">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <form id="form" action="/signup2" method="POST" class='text-center p-5'>
+      <h3 class='h2 mb-4'>¡Bienvenido a IRON PETS!</h3>
+      <p class='h6 mb-4 form-text text-muted pl-4 pr-4'>Ingresa tus datos de contacto para ayudarte en todo momento</p>
+      <div class="form-row">
+        <div class="col">
+            <input type="text" class="form-control mb-4" placeholder="Nombre(s) *">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control mb-4" placeholder="Apellido(s) *">
+        </div>
       </div>
       <div class="form-group">
-        <input type="text" name="lastname" class="form-control" placeholder="Apellido(s)">
-      </div>
-      <div class="form-group">
-          <input type="email" name="email" class="form-control" placeholder="Correo electronico" aria-describedby="emailHelp">
+          <input type="email" name="email" class="form-control mb-4" placeholder="Correo electronico *" aria-describedby="emailHelp">
       </div>  
       <div class="form-group">
-        <input type="number" name="phone" class="form-control" placeholder="Télefono"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+        <input type="number" name="phone" class="form-control mb-4" placeholder="Télefono *"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
       </div>
       <div class="form-group">
-        <input type="password" name="password" class="form-control" placeholder="Contraseña">
+        <input type="password" name="password" class="form-control mb-4" placeholder="Contraseña *">
       </div>
-      <div class="form-group">
+      <div class="form-group mb-4">
           <select id="userType" name="role" class="custom-select" required>
                 <option value="">Soy:</option>
                 <option value="ironSaver">ironSaver</option>
@@ -26,21 +29,14 @@
             </select>
         </div>
          <div id="Refugio" class="form-group direction" style="display:none">
-          <input type="text" name="direction" class="form-control" placeholder="Dirección del refugio" >
+          <input type="text" name="direction" class="form-control mb-4" placeholder="Dirección del refugio" >
         </div>
-      <br>
-      <br>
-      <input type="submit">Crear cuenta</input>
+      <button class="btn btn-info my-4 btn-block" type="submit">Submit</button>
         {{#if errorMessage}}
           <div class="error-message">{{ errorMessage }}</div>
         {{/if}}
       <br>
-      <p class="account-message">
-         Ya tienes una cuenta? <a href="/login">Log in</a>
-      </p>
+      <p class="h6 account-message text-muted">Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
     </form>
   </div>
 </div>
-
-  
-

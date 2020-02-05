@@ -17,10 +17,11 @@ const LocalStrategy = require("passport-local").Strategy;
 //const router = express.Router();
 const MongoStore = require("connect-mongo")(session);
 
-
+mongodb://localhost/basic-auth
 mongoose.Promise = Promise;
 mongoose
   .connect('mongodb+srv://userAdminJp:ironpets923@cluster0-o48uv.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true,  useUnifiedTopology: true})
+  //.connect('mongodb://localhost/ironPets', {useNewUrlParser: true,  useUnifiedTopology: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

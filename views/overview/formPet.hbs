@@ -1,82 +1,62 @@
 {{!< layout}}
-<form action="/overview/addPet" method="POST" enctype="multipart/form-data">
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+    <form id="form" action="/overview/addPet" method="POST" enctype="multipart/form-data" class='text-center p-5'>
+        <h3 class='h2 mb-4'>Registra a tu mascota</h3>
+         <p class='h6 mb-4 form-text text-muted pl-4 pr-4'>Ingresa los detalles de tu mascota</p>
         <div class="form-group">
-          <input type="text" name="name" class="form-control" placeholder="Nombre de la mascota">
+            <input type="text" name="name" class="form-control" placeholder="Nombre de la mascota * ">
         </div>
-        <div class="form-group">
-            <select name="specie" class="custom-select" required>
-                <option value="">Especie</option>
-                <option value="Dog">Perro</option>
-                <option value=" Cat">Gato</option>
-                <option value="Other">Otro</option>
-            </select>
-            <div class="invalid-feedback">Example invalid custom select feedback</div>
-        </div>
-        <label for="validationServer01">Edad:</label>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="age" value="Adulto - De 3 a 6 años">
-            <label class="form-check-label" >
-                Adulto - De 3 a 6 años.
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="age" value="Joven - De 1.5 a 3 años">
-            <label class="form-check-label" >
-                 Joven - De 1.5 a 3 años.
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="age" value="Cachorro - De 0 a 1.5 añoss">
-            <label class="form-check-label" >
-                 Cachorro - De 0 a 1.5 años.
-            </label>
-        </div>
-   
-        <label for="validationServer01">Tamaño:</label>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="size"  value="Extra Grande - Más de 45 Kg">
-            <label class="form-check-label">
-                Extra Grande - Más de 45 Kg.
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="size"  value="Grande - De 22 Kg. a 45 Kg">
-            <label class="form-check-label">
-                 Grande - De 22 Kg. a 45 Kg.
-            </label>
+        <div class="form-row mb-4">
+            <div class="col">
+                <select name="specie" class="custom-select" required>
+                    <option value="">Especie</option>
+                    <option value="Dog">Perro</option>
+                    <option value=" Cat">Gato</option>
+                    <option value="Other">Otro</option>
+                </select>
+                <div class="invalid-feedback">Example invalid custom select feedback</div>
+            </div>
+            <div class="col">
+                <select name="sterilized" class="custom-select" required>
+                    <option value="">Esterilizado</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                    <option value="Other">Otro</option>
+                </select>
+                <div class="invalid-feedback">Example invalid custom select feedback</div>
+             </div> 
         </div>
 
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="size"  value="Mediano - De 11 Kg. a 22 Kg">
-            <label class="form-check-label">
-                 Mediano - De 11 Kg. a 22 Kg.
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="size"  value="Pequeño - De 5 Kg. a 11kg.">
-            <label class="form-check-label">
-                 Pequeño - De 5 Kg. a 11kg.
-            </label>
-        </div>
-         <div class="form-check">
-            <input class="form-check-input" type="radio" name="size" value="Muy pequeño - Hasta 5 Kg.">
-            <label class="form-check-label">
-                 Muy pequeño - Hasta 5 Kg.
-            </label>
-        </div>
         <div class="form-group">
-            <select  name="sterilized"class="custom-select" required>
-            <option value="">Esterilizado</option>
-            <option value="Si">Si</option>
-            <option value="No">No</option>
-            <option value="Other">Otro</option>
+            <select name="age" class="custom-select" required>
+                <option value="">Edad</option>
+                <option value="Adulto - De 3 a 6 años">Adulto - De 3 a 6 años</option>
+                <option value="Joven - De 1.5 a 3 años">Joven - De 1.5 a 3 años</option>
+                <option value="Cachorro - De 0 a 1.5 años">Cachorro - De 0 a 1.5 años.</option>
             </select>
             <div class="invalid-feedback">Example invalid custom select feedback</div>
-        </div> 
+        </div>
+
+        <div class="form-group">
+            <select name="size" class="custom-select" required>
+                <option value="">Tamaño</option>
+                <option value="Extra Grande - Más de 45 Kg">Extra Grande - Más de 45 Kg</option>
+                <option value="Grande - De 22 Kg. a 45 Kg">Grande - De 22 Kg. a 45 Kg</option>
+                <option value="Mediano - De 11 Kg. a 22 Kg">Mediano - De 11 Kg. a 22 Kg</option>
+                <option value="Pequeño - De 5 Kg. a 11kg">Pequeño - De 5 Kg. a 11kg</option>
+                <option value="Muy pequeño - Hasta 5 Kg">Muy pequeño - Hasta 5 Kg</option>
+            </select>
+            <div class="invalid-feedback">Example invalid custom select feedback</div>
+        <div>
         <div>
             <label></label>
             <input type="file" name="photo">
         </div>
-    
-        <button type="submit" class="btn btn-primary">Añadir nueva mascota</button>
-      </form>
+        
+        <button type="submit" class="btn btn-primary btn-info my-4 btn-block">Añadir nueva mascota</button>
+        </form>
+    </div>
+</div>
+
+

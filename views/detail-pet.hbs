@@ -6,29 +6,32 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-      <img src="/images/pet_1.jpg" alt="">
+      <img src="{{petDetails.petPath}}" alt="" class='card-img-top'>
   </div>
   <div class="col-md-6">
     <p>Especie: {{petDetails.specie}}</p>
     <p>Edad:{{petDetails.age}}</p>
     <p>Tamaño: {{petDetails.size}}</p>
     <p>ironSaver/Refugio: {{petDetails.shelter.role}}</p>
-
-
     <button class="btn btn-primary" id="formButton">Adoptar</button>
-    <p>Escribele un mensaje a {{petDetails.shelter.name}}  para que sepa que estas interesado a adoptar a {{petDetails.name}}</p>
-    <p>Ingresa un email y un telefono de contacto para que se puedan poner en contacto contigo</p>
-    <form id="form1"action="/send-email" method="post">
-      <input type="hidden" name="emailShelter" id="" value="{{petDetails.shelter.email}}">
-      <label for="">Email de contacto</label>
-      <input type="email" name="email" id="" value="">
-      <label for="">Telefono de contacto</label>
-      <input type="number" name="phone" id="" value="">
-      <label for="">Subject</label>
-      <input type="text" name="subject" id="" value="petAdoption">
-      <label for="">Message</label>
-      <textarea type="text" name="message" id=""></textarea>
-      <button type="submit">Postularse</button>
+
+    <form id="form1" action="/send-email" method="post" class='text-center text-muted mb-4 p-4'>
+    <p class=' pl-4 pr-4 h5 mb-4'>Escríbe un mensaje al dueño para que sepa que estas interesado en adoptar a {{petDetails.name}}</p>
+    {{!-- <p>Llena el siguiente formulario para que se puedan poner en contacto contigo</p> --}}
+      <div class="form-group mb-2">
+        <input type="hidden" name="emailShelter" id="" value="{{petDetails.shelter.email}}">
+        <input type="email" name="email" id="" value="" placeholder="Correo electrónico">
+      </div>
+      <div class='form-group mb-2'>
+        <input type="number" name="phone" id="" value="" placeholder="Telefono de contacto">
+      </div>
+      <div class='form-group mb-2'>
+        <input type="text" name="subject" id="" value="Asunto:" placeholder="Asunto">
+      </div>
+      <div class='form-group mb-2'>
+        <textarea type="text" name="message" id="" placeholder="Escribe aquí tu mensaje"> </textarea>
+      </div>
+      <button type="submit">Adoptar</button>
     </form>
   </div>
 </div>

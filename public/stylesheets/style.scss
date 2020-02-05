@@ -1,37 +1,144 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 0px 5%;
+  //font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Nunito', sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
-a {
-  color: #00B7FF;
+h2 {
+  font-family: 'Nunito', sans-serif;
+}
+
+
+h3 {
+  font-family: 'Nunito', sans-serif;
+  color: #32407B;
+}
+
+h4 {
+  font-family: 'Nunito', sans-serif;
+  margin: 10px 0;
+  padding: 10px 20px;
+  color: #32407B;
+}
+
+h5 {
+  font-family: 'Nunito', sans-serif;
+  margin: 0px 0 10px 20px;
+  padding: 0px 0 20px 20px;
+  font-size: 15px;
+  color: #32407B;
+}
+
+p {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.2em;
+}
+
+.nav-link {
+  color:white;
+}
+
+.nav-item {
+  color: white;
+  padding: 0 15px;
+  font-size: 1.1em;
+}
+
+.login-item {
+  padding-right: 15px;
 }
 
 nav {
-	position: fixed;
-	height: 100px;
+  background-color: #32407B;
+  background-size: cover;
+  height: 70px;
+  display: block;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-// .navbar-nav {
-//   display: flex;
-//   padding: 10% 20%;
-//   justify-content: space-around;
-// }
+.navbar-nav {
+  display: flex;
+  padding: 10% 20%;
+  margin: 0 20px;
+}
+
+.find-pets {
+  margin: 2em 2em 0 2em;
+  padding: 100px 25px 50px 25px;
+}
 
 .cdmx-info h2 {
-  padding-top: 50px;
+  margin: 0px 0 10px 20px;
+  padding: 0 0 20px 20px;
+  font-size: 40px;
+  align-items: center;
 }
 
 .cdmx-info p {
-  padding-top: 20px;
+  margin: 10px 0 10px 20px;
+  padding: 10px 0 10px 20px;
+  font-size: 130%;
 }
 
+.card-img-p {
+  width: 700px;
+  padding-right: 200px;
+}
 
+.info-pets {
+  margin: 50px;
+  padding: 0 50px;
+}
 
+.card-img-top {
+  width: 200px;
+  padding: 50px;
+}
+
+.card-title {
+  text-align: center;
+  font-size: 1.8em;
+  padding: 0 10px;
+}
+
+.card-text {
+  font-size: 16px;
+  text-align: center;
+  padding: 5px 25px;
+}
+
+.card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.card-body {
+  color: black;
+}
 
 #form {
+  margin:80px auto 100px auto;
+  width: 500px;
+}
+
+#form1 {
   margin: 30px auto;
-  width: 380px;
+  width: 500px;
+}
+
+#form1 label {
+  color: #666;
+  display: inline-block;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
 }
 
 #form label {
@@ -52,11 +159,36 @@ nav {
   margin-bottom: 10px;
 }
 
+#form1 input,
+#form1 button {
+  box-sizing: border-box;
+  font-size: 14px;
+  outline: 0;
+  padding: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 #form button {
-  background: #43a3e6;
+  background: #F7B500;
   border: 1px solid #43a3e6;
   border-radius: 4px;
-  color: #fff;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: .3s ease background;
+  width: 100%;
+}
+
+#form1 button {
+  background: #F7B500;
+  border: 1px solid #43a3e6;
+  border-radius: 4px;
+  color: black;
   cursor: pointer;
   display: inline-block;
   font-size: 14px;
@@ -73,6 +205,13 @@ nav {
   transition: .3s ease background;
 }
 
+#form1 button:hover {
+  background: #fff;
+  color: #43a3e6;
+  transition: .3s ease background;
+}
+
+
 /*# sourceMappingURL=style.css.map */
 .cards-container {
   display: flex;
@@ -86,6 +225,7 @@ nav {
   height: 300px;
 
 }
+
 #form1 {
   padding: 15px;
   border: 1px solid #666;
@@ -98,6 +238,39 @@ nav {
   margin-right: auto;
   margin-left: auto;
 }
+
+.carousel-pets {
+  text-align: center;
+  margin: 80px 200px;
+  padding: 50px;
+}
+
+.carousel-pets h2 {
+  font-size: 40px;
+}
+
+.carousel-item {
+  align-items: center;
+}
+
+.d-block{
+  image-orientation: center;
+}
+
+.footer-pets {
+  color: white;
+  width: 100%;
+  background-color: #32407B;
+  height: 70px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.footer-both {
+ text-align: center;
+}
+
 $color-bluenavy: #32407B;
 $color-bue: #46B5D1;
 $color-black: #4A4A4A;

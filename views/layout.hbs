@@ -10,38 +10,52 @@
 </head>
 
 <body>
-  <div class="container">
-      <nav class="navbar navbar-expand-lg navbar-light ">
-        <a class="navbar-brand" href="/">
-          <img src="images/icon.png" width="30" height="30" alt="logo">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-item nav-link" href="/allPets">Adopta</a>
-            <a class="nav-item nav-link" href="/overview">Registra</a>
-            <a class="nav-item nav-link" href="/findPets">Ubica</a>
-            {{#unless user}}
-            <a class="nav-item nav-link" href="/login">Login</a>
-            {{/unless}}       
-          </div>
+  {{!-- <div class="container"> --}}
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <a class="navbar-brand" href="/">
+        <img src="/images/ironPetsLogo@2x.png" width="105" height="45" alt="logo">
+      </a>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <li class="nav-link active">
+            <a class="nav-item" href="/allPets">Adopta</a>
+            </li>
+          <li class="nav-link ">
+            <a class="nav-item" href="/overview">Registra</a>
+          </li>
+          <li class="nav-link ">
+            <a class="nav-item" href="/findPets">Ubica</a>  
+          </li>          
+              
         </div>
-      </nav>  
-  </div>
+      </div>
+      <div class='login-item'>
+        {{#unless user}}
+        <a class="nav-item nav-link" href="/login">Login</a>
+        {{/unless}} 
+      </div>
+    </div>
+  </nav>  
+  {{!-- </div> --}}
       {{{body}}}
     <!-- Footer -->
-	<section id="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col align-self-start">
-					<p>Enero 2020</p>
-				</div>
-        <div class="col align-self-end">
-					<p>Made with &#9829 by ironHackers</p>
-				</div>
-				</hr>
-			</div>	
-		</div>
-	</section>
+  <div class='row'>
+    <div class='col-lg-12 col-md-12 col-sm-12'>
+      <section id="footer" class='footer-pets'>
+        <div class="container">
+          <div class='footer-both'>
+            <span class="align-middle">ironpets.com © 2020. Todos los derechos reservados.</span>
+            <br>
+            <span class="align-middle">Made with &#9829 by ironHackers</span>
+          </div>
+          </div>
+          </hr>
+          </div>	
+        </div>
+      </section>
+    </div>
+  </div>
+	
 	<!-- ./Footer -->
 
 
