@@ -97,6 +97,7 @@ router.post("/signup2", (req, res, next) => {
       }
       if(role==="Refugio"){
         const newUser = new User ({name, lastname,email, phone, role, direction,password: hashPass});
+        console.log(newUser)
      /*    User.create({
           name, 
           lastname,
@@ -125,13 +126,13 @@ router.post("/signup2", (req, res, next) => {
           role,
           password: hashPass
         }) */
-        newUser.save()
+  /*       newUser.save()
         .then(() => {
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
-        })
+        }) */
       }
       
   })

@@ -225,4 +225,10 @@ nav {
 .footer-both {
   text-align: center; }
 
+#map {
+  height: 50vh; }
+
+.centrar {
+  text-align: center; }
+
 /*# sourceMappingURL=style.css.map */
