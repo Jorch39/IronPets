@@ -5,6 +5,7 @@ const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
 const nodemailer = require('nodemailer')
 const uploadCloud = require('../config/cloudinary.js');
+const passport     = require("passport");
 
 
 //Models
@@ -13,14 +14,23 @@ const Pet = require("../models/Pet");
 
 
 router.get("/", (req, res, next) => {
-  res.render("index");
+  Pet.find()
+  .then(allPets =>{
+    const chosenPets = [];
+    chosenPets.push(allPets.splice(Math.floor(Math.random()*allPets.length), 1)[0])
+    chosenPets.push(allPets.splice(Math.floor(Math.random()*allPets.length), 1)[0])
+    chosenPets.push(allPets.splice(Math.floor(Math.random()*allPets.length), 1)[0])
+    
+    res.render('index', {user: req.session.user, chosenPets})
+    //console.log(allPets)
+  })
 });
 
 
 router.get('/allPets', (req, res, next) => {
   Pet.find()
   .then(allPets =>{
-    res.render('allPets', {allPets : allPets})
+    res.render('allPets', {user: req.session.user, allPets : allPets})
     //console.log(allPets)
   })
   //res.render('allPets');
@@ -33,7 +43,7 @@ router.get('/allPets/:id', (req, res, next) => {
   .populate("shelter")
   .then(pet =>{
     console.log(pet);
-    res.render('detail-pet', {petDetails : pet})
+    res.render('detail-pet', {user: req.session.user, petDetails : pet})
   })
   .catch(err => console.log(err))
    /*  Pet.find()
@@ -66,17 +76,21 @@ router.post('/send-email', (req, res, next) => {
 });
 
 router.get('/findPets', (req, res, next) => {
+
+  res.render('findPets', {user: req.session.user});
+
   User.find({ "role":"Refugio"})
   .then(userRefugio =>{
-    res.render('findPets', {listRefugio : userRefugio})
+    res.render('findPets', {user: req.session.user, listRefugio : userRefugio})
   })
   .catch(err =>{console.log(err)});
  
+
 });
 
 //SignUp
 router.get("/signup2", (req, res, next) => {
-  res.render("signUp2");
+  res.render("signUp2", {user: req.session.user});
 });
 
 router.post("/signup2", (req, res, next) => {
@@ -157,7 +171,7 @@ router.get("/login", (req, res, next) => {
   if(req.session.user){
     return res.redirect('/overview');
   }
-  res.render("login", { "message": req.flash("error") });
+  res.render("login", { user: req.session.user, "message": req.flash("error") });
 });
 
 // router.get("/login", (req, res, next) => {
@@ -213,11 +227,27 @@ router.post("/login", (req, res, next) => {
 });
 
 
-
 // router.get("/overview", ensureLogin.ensureLoggedIn(), (req, res) => {
 //   res.render("myPetList", { user: req.user });
 // });
 
+//GOOGLE
+// router.get(
+//   "/auth/google",
+//   passport.authenticate("google", {
+//     scope: [
+//       "https://www.googleapis.com/auth/userinfo.profile",
+//       "https://www.googleapis.com/auth/userinfo.email"
+//     ]
+//   })
+// );
+// router.get(
+//   "/auth/google/callback",
+//   passport.authenticate("google", {
+//     successRedirect: "/login",
+//     failureRedirect: "/login" // here you would redirect to the login page using traditional login approach
+//   })
+// );
 
 router.use((req, res, next) => {
   if (req.session.currentUser) { // <== if there's user in the session (user is logged in)
@@ -228,6 +258,7 @@ router.use((req, res, next) => {
 }); // ------------------------------------                                
 //     | 
 //     V
+//* este me redirecciona a overview 
 router.get("/overview", (req, res, next) => {
   const idUser = req.session.user.id;
   console.log(idUser)
@@ -238,6 +269,7 @@ router.get("/overview", (req, res, next) => {
    })
    .catch(err => console.log("And error ocurred x.x"))
 });
+
 
 router.get('/overview/addPet', (req,res) =>{
   res.render('overview/formPet', {user: req.session.user})
@@ -265,5 +297,9 @@ router.get("/logout", (req, res, next) => {
     res.redirect("/login");
   });
 });
+
+
+
+
 
 module.exports = router;
