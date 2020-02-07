@@ -76,7 +76,16 @@ router.post('/send-email', (req, res, next) => {
 });
 
 router.get('/findPets', (req, res, next) => {
+
   res.render('findPets', {user: req.session.user});
+
+  User.find({ "role":"Refugio"})
+  .then(userRefugio =>{
+    res.render('findPets', {user: req.session.user, listRefugio : userRefugio})
+  })
+  .catch(err =>{console.log(err)});
+ 
+
 });
 
 //SignUp
@@ -85,7 +94,13 @@ router.get("/signup2", (req, res, next) => {
 });
 
 router.post("/signup2", (req, res, next) => {
-  const {name, lastname,email,phone,password,role,direction} = req.body;
+  let location = {
+    type: req.body.direction,
+    coordinates: [req.body.lat, req.body.lng]
+
+    };
+    
+  const {name, lastname,email,phone,password,role} = req.body;
   console.log(req.body);
   const salt     = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
@@ -106,7 +121,8 @@ router.post("/signup2", (req, res, next) => {
         return;
       }
       if(role==="Refugio"){
-        const newUser = new User ({name, lastname,email, phone, role, direction,password: hashPass});
+        const newUser = new User ({name, lastname,email, phone, role, location,password: hashPass});
+        console.log(newUser)
      /*    User.create({
           name, 
           lastname,
@@ -135,13 +151,13 @@ router.post("/signup2", (req, res, next) => {
           role,
           password: hashPass
         }) */
-        newUser.save()
+  /*       newUser.save()
         .then(() => {
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
-        })
+        }) */
       }
       
   })

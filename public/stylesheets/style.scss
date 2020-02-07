@@ -219,7 +219,7 @@ nav {
 /*# sourceMappingURL=style.css.map */
 .cards-container {
   display: flex;
-  padding: 10% 20%;
+  padding: 15px 20px;
   justify-content: space-around;
 }
 
@@ -273,6 +273,12 @@ nav {
 
 .footer-both {
  text-align: center;
+}
+#map{
+  height: 50vh;
+}
+.centrar{
+  text-align: center;
 }
 
 .loginBtn {

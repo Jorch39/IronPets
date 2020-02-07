@@ -133,6 +133,10 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'icon.png')));
 
 hbs.registerPartials(__dirname + '/views/partials');
 
+hbs.registerHelper('json', function(context) {
+  return JSON.stringify(context);
+});
+
 
 // default value for title local
 app.locals.title = 'IronPets';
@@ -150,7 +154,7 @@ app.use('/userRotes', userRoutes);
 
 
 
-app.listen(5000, () => console.log("Server ready, happy code :3"))
+//app.listen(5000, () => console.log("Server ready, happy code :3"))
 
 
 module.exports = app;
