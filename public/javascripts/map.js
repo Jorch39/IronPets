@@ -21,7 +21,7 @@ const initMap = (coordinates)=>{
         center: coordinates,
         zoom: 12
       });
-    arrayRefugio.map( elem=>{
+     arrayRefugio.map( elem=>{
 
         let coordenadas = {
             lat: elem.location.coordinates[0], 
@@ -32,7 +32,7 @@ const initMap = (coordinates)=>{
             map: map
             });
     })
-    
+     
 }
 
 

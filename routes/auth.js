@@ -93,7 +93,7 @@ router.post('/send-email', (req, res, next) => {
  */
 router.get('/findPets', (req, res, next) => {
 
-  res.render('findPets', {user: req.session.user});
+ // res.render('findPets', {user: req.session.user});
 
   User.find({ "role":"Refugio"})
   .then(userRefugio =>{
@@ -127,9 +127,9 @@ router.post("/signup2", (req, res, next) => {
     return;
   }
     
-  User.findOne({ "email": email })
-  .then(user => {
-    if (user !== null) {
+    User.findOne({ "email": email })
+    .then(user => {
+      if (user !== null) {
         res.render("signUp2", {
           errorMessage: "The email already exists!"
         });
@@ -145,32 +145,19 @@ router.post("/signup2", (req, res, next) => {
           console.log(error);
         })
       }else{
-        const newUser = new User ({name, lastname,email, phone, role, location,password: hashPass});
+        const newUser = new User ({name, lastname,email, phone, role:"ironSaver",password: hashPass});
         newUser.save()
         .then((newUSer) => {
-      User.create({
-          name, 
-          lastname,
-          email,
-          phone,
-          role,
-          password: hashPass
-        }) 
-        newUser.save()
-        .then(() => {
-
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
-
         })
-     }
-      
-  })
-  .catch(error => {
-    next(error);
-  });
+      }
+    })
+    .catch(error => {
+      next(error);
+    });
 });
 
 //Login
