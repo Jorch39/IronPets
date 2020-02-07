@@ -38,9 +38,6 @@ p {
 .login-item {
   padding-right: 15px; }
 
-.fb-strategy {
-  padding-top: 400px; }
-
 nav {
   background-color: #32407B;
   background-size: cover;
@@ -72,11 +69,10 @@ nav {
 
 .card-img-p {
   width: 700px;
-  padding-right: 200px; }
+  padding-right: 100px; }
 
 .info-pets {
-  margin: 50px;
-  padding: 0 50px; }
+  padding: 0 50px 0 50px; }
 
 .card-img-top {
   width: 200px;
@@ -180,6 +176,54 @@ nav {
   color: #43a3e6;
   transition: .3s ease background; }
 
+.ver-mas {
+  background: #F7B500;
+  border: 1px solid #43a3e6;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: .3s ease background;
+  width: 120px; }
+
+.ver-mas:hover {
+  background: #fff;
+  color: #43a3e6;
+  transition: .3s ease background; }
+
+.ver-mas:hover {
+  background: #fff;
+  color: #43a3e6;
+  transition: .3s ease background; }
+
+.ver-mas-card {
+  background: #F7B500;
+  border: 1px solid #43a3e6;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: .3s ease background;
+  width: 50%; }
+
+.ver-mas-card:hover {
+  background: #fff;
+  color: #43a3e6;
+  transition: .3s ease background; }
+
+.ver-mas-card:hover {
+  background: #fff;
+  color: #43a3e6;
+  transition: .3s ease background; }
+
 /*# sourceMappingURL=style.css.map */
 .cards-container {
   display: flex;
@@ -204,8 +248,8 @@ nav {
 
 .carousel-pets {
   text-align: center;
-  margin: 80px 200px;
-  padding: 50px; }
+  margin: 50px 0px;
+  padding: 30px 200px; }
 
 .carousel-pets h2 {
   font-size: 40px; }
@@ -213,12 +257,21 @@ nav {
 .carousel-item {
   align-items: center; }
 
+.all-pets {
+  margin: 100px; }
+
+.overview-pets {
+  margin: 100px 50px; }
+
+.detail-pet {
+  margin: 100px 50px; }
+
 .d-block {
   image-orientation: center; }
 
 .footer-pets {
   color: white;
-  width: 100%;
+  width: 1300px;
   background-color: #32407B;
   height: 70px;
   align-items: center;

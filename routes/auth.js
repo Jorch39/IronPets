@@ -250,23 +250,6 @@ router.post("/login", (req, res, next) => {
 //   res.render("myPetList", { user: req.user });
 // });
 
-//GOOGLE
-// router.get(
-//   "/auth/google",
-//   passport.authenticate("google", {
-//     scope: [
-//       "https://www.googleapis.com/auth/userinfo.profile",
-//       "https://www.googleapis.com/auth/userinfo.email"
-//     ]
-//   })
-// );
-// router.get(
-//   "/auth/google/callback",
-//   passport.authenticate("google", {
-//     successRedirect: "/login",
-//     failureRedirect: "/login" // here you would redirect to the login page using traditional login approach
-//   })
-// );
 
 router.use((req, res, next) => {
   if (req.session.currentUser) { // <== if there's user in the session (user is logged in)
@@ -300,7 +283,7 @@ router.post('/overview/addPet', uploadCloud.single('photo'), (req,res,next) =>{
   const {name, specie, age, size, sterilized, shelter} = req.body;
   const petPath = req.file.url;
   const petImgName = req.file.originalname;
-  const newPet =  new Pet({name, specie, age, size,sterilized, status:"Disponibe", petPath, petImgName, shelter:user.id});
+  const newPet =  new Pet({name, specie, age, size,sterilized, status:"Disponible", petPath, petImgName, shelter:user.id});
    newPet.save()
   .then(pet =>{
     console.log("New pet succefully added");

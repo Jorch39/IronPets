@@ -1,0 +1,1 @@
+<h2>Notificación enviada</h2>
