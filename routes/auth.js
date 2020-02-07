@@ -30,10 +30,11 @@ router.get("/", (req, res, next) => {
 router.get('/allPets', (req, res, next) => {
   Pet.find()
   .then(allPets =>{
+
     res.render('allPets', {user: req.session.user, allPets : allPets})
     //console.log(allPets)
+
   })
-  //res.render('allPets');
 });
 
 router.get('/allPets/:id', (req, res, next) => {
@@ -42,16 +43,12 @@ router.get('/allPets/:id', (req, res, next) => {
   Pet.findById(req.params.id)
   .populate("shelter")
   .then(pet =>{
+
     console.log(pet);
     res.render('detail-pet', {user: req.session.user, petDetails : pet})
+
   })
   .catch(err => console.log(err))
-   /*  Pet.find()
-  .then(allPets =>{
-    res.render('allPets', {allPets : allPets})
-    console.log(allPets)
-  }) */
- 
 });
 router.post('/send-email', (req, res, next) => {
   let { email, emailShelter,phone,subject, message } = req.body;
@@ -120,7 +117,6 @@ router.post("/signup2", (req, res, next) => {
     };
     
   const {name, lastname,email,phone,password,role} = req.body;
-  console.log(req.body);
   const salt     = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 
@@ -141,28 +137,18 @@ router.post("/signup2", (req, res, next) => {
       }
       if(role==="Refugio"){
         const newUser = new User ({name, lastname,email, phone, role, location,password: hashPass});
-        console.log(newUser)
-     /*    User.create({
-          name, 
-          lastname,
-          email,
-          phone,
-          role,
-          direction,
-          
-        }) */
         newUser.save()
         .then((newUSer) => {
-          console.log(req.user)
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
         })
       }else{
-        const newUser = new User ({name, lastname,email, phone, role,password: hashPass});
-
-         User.create({
+        const newUser = new User ({name, lastname,email, phone, role, location,password: hashPass});
+        newUser.save()
+        .then((newUSer) => {
+      User.create({
           name, 
           lastname,
           email,
@@ -172,12 +158,14 @@ router.post("/signup2", (req, res, next) => {
         }) 
         newUser.save()
         .then(() => {
+
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
-        }) 
-      }
+
+        })
+     }
       
   })
   .catch(error => {
@@ -193,17 +181,6 @@ router.get("/login", (req, res, next) => {
   res.render("login", { user: req.session.user, "message": req.flash("error") });
 });
 
-// router.get("/login", (req, res, next) => {
-//   res.render("login");
-// });
-
-// router.post("/login", passport.authenticate("local", {
-//   successRedirect: "/",
-//   failureRedirect: "/login",
-//   failureFlash: true,
-//   passReqToCallback: true
-// }));
-
 router.post("/login", (req, res, next) => {
   const theEmail = req.body.email;
   const thePassword = req.body.password;
@@ -214,10 +191,8 @@ router.post("/login", (req, res, next) => {
     });
     return;
   }
-
   User.findOne({ "email": theEmail })
   .then(user => {
-
       if (!user) {
         res.render("login", {
           errorMessage: "The email doesn't exist."
@@ -244,29 +219,6 @@ router.post("/login", (req, res, next) => {
     next(error);
   })
 });
-
-
-// router.get("/overview", ensureLogin.ensureLoggedIn(), (req, res) => {
-//   res.render("myPetList", { user: req.user });
-// });
-
-//GOOGLE
-// router.get(
-//   "/auth/google",
-//   passport.authenticate("google", {
-//     scope: [
-//       "https://www.googleapis.com/auth/userinfo.profile",
-//       "https://www.googleapis.com/auth/userinfo.email"
-//     ]
-//   })
-// );
-// router.get(
-//   "/auth/google/callback",
-//   passport.authenticate("google", {
-//     successRedirect: "/login",
-//     failureRedirect: "/login" // here you would redirect to the login page using traditional login approach
-//   })
-// );
 
 router.use((req, res, next) => {
   if (req.session.currentUser) { // <== if there's user in the session (user is logged in)

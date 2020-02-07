@@ -22,7 +22,7 @@ const initMap = (coordinates)=>{
         zoom: 12
       });
     arrayRefugio.map( elem=>{
-        console.log(elem.location);
+
         let coordenadas = {
             lat: elem.location.coordinates[0], 
             lng: elem.location.coordinates[1]

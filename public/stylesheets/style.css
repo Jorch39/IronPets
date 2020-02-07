@@ -234,6 +234,9 @@ nav {
 .centrar {
   text-align: center; }
 
+.map {
+  height: 80vh;
+  margin-top: 10em; }
 .loginBtn {
   box-sizing: border-box;
   position: relative;
@@ -282,5 +285,6 @@ nav {
 
 .mt-3 {
   margin-top: 3rem; }
+
 
 /*# sourceMappingURL=style.css.map */
