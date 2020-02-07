@@ -54,20 +54,16 @@
   <div class="row">
     <div class="col-md-12 col-sm-12">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
+        {{!-- <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
+        </ol> --}}
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="{{petDetails.petPath}}" alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="{{petDetails.petPath}}" alt="Second slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="{{petDetails.petPath}}" alt="Third slide">
+              {{#each chosenPets}}
+                <img class="d-block w-100" src="{{this.petPath}}" alt="">
+              {{/each}}
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

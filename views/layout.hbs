@@ -29,11 +29,15 @@
               
         </div>
       </div>
-      <div class='login-item'>
-        {{#unless user}}
-        <a class="nav-item nav-link" href="/login">Login</a>
-        {{/unless}} 
+      {{#if user}}
+      <div class='logout-item'>
+        <a href="/logout">Logout</a>
       </div>
+      {{else}}
+      <div class='login-item'>
+        <a class="nav-item nav-link" href="/login">Login</a>
+      </div>
+      {{/if}}
     </div>
   </nav>  
   {{!-- </div> --}}
