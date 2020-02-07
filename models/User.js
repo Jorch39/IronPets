@@ -9,8 +9,7 @@ const userSchema = new Schema ({
   password : { type: String, required: true, maxlength : 100 , trim:true},
   phone : { type: Number, required: true},  
   role: { type: String ,required: true, maxlength : 100 , trim:true},
-  direction : { type: String , maxlength : 100 , trim:true},
-
+  location: { type: { type: String }, coordinates: [Number] }
   }, 
   {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
