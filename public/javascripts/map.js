@@ -19,7 +19,7 @@ const showLocation= ()=>{
 const initMap = (coordinates)=>{
    const map = new google.maps.Map(document.getElementById('map'), {
         center: coordinates,
-        zoom: 17
+        zoom: 12
       });
     arrayRefugio.map( elem=>{
         console.log(elem.location);
