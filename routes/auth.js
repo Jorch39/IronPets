@@ -21,9 +21,7 @@ router.get('/allPets', (req, res, next) => {
   Pet.find()
   .then(allPets =>{
     res.render('allPets', {allPets : allPets})
-    //console.log(allPets)
   })
-  //res.render('allPets');
 });
 
 router.get('/allPets/:id', (req, res, next) => {
@@ -32,16 +30,9 @@ router.get('/allPets/:id', (req, res, next) => {
   Pet.findById(req.params.id)
   .populate("shelter")
   .then(pet =>{
-    console.log(pet);
     res.render('detail-pet', {petDetails : pet})
   })
   .catch(err => console.log(err))
-   /*  Pet.find()
-  .then(allPets =>{
-    res.render('allPets', {allPets : allPets})
-    console.log(allPets)
-  }) */
- 
 });
 
 
@@ -108,43 +99,23 @@ router.post("/signup2", (req, res, next) => {
       }
       if(role==="Refugio"){
         const newUser = new User ({name, lastname,email, phone, role, location,password: hashPass});
-        console.log(newUser)
-     /*    User.create({
-          name, 
-          lastname,
-          email,
-          phone,
-          role,
-          direction,
-          
-        }) */
         newUser.save()
         .then((newUSer) => {
-          console.log(req.user)
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
         })
       }else{
-        const newUser = new User ({name, lastname,email, phone, role,password: hashPass});
-
-       /*  User.create({
-          name, 
-          lastname,
-          email,
-          phone,
-          role,
-          password: hashPass
-        }) */
-  /*       newUser.save()
-        .then(() => {
+        const newUser = new User ({name, lastname,email, phone, role, location,password: hashPass});
+        newUser.save()
+        .then((newUSer) => {
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
-        }) */
-      }
+        })
+     }
       
   })
   .catch(error => {
@@ -160,17 +131,6 @@ router.get("/login", (req, res, next) => {
   res.render("login", { "message": req.flash("error") });
 });
 
-// router.get("/login", (req, res, next) => {
-//   res.render("login");
-// });
-
-// router.post("/login", passport.authenticate("local", {
-//   successRedirect: "/",
-//   failureRedirect: "/login",
-//   failureFlash: true,
-//   passReqToCallback: true
-// }));
-
 router.post("/login", (req, res, next) => {
   const theEmail = req.body.email;
   const thePassword = req.body.password;
@@ -181,10 +141,8 @@ router.post("/login", (req, res, next) => {
     });
     return;
   }
-
   User.findOne({ "email": theEmail })
   .then(user => {
-
       if (!user) {
         res.render("login", {
           errorMessage: "The email doesn't exist."
@@ -211,13 +169,6 @@ router.post("/login", (req, res, next) => {
     next(error);
   })
 });
-
-
-
-// router.get("/overview", ensureLogin.ensureLoggedIn(), (req, res) => {
-//   res.render("myPetList", { user: req.user });
-// });
-
 
 router.use((req, res, next) => {
   if (req.session.currentUser) { // <== if there's user in the session (user is logged in)
