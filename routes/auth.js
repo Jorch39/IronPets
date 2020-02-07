@@ -78,7 +78,6 @@ router.post("/signup2", (req, res, next) => {
     };
     
   const {name, lastname,email,phone,password,role} = req.body;
-  console.log(req.body);
   const salt     = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 
