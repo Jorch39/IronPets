@@ -228,6 +228,11 @@ nav {
 .footer-both {
   text-align: center; }
 
+#map {
+  height: 50vh; }
+
+.centrar {
+  text-align: center; }
 
 .loginBtn {
   box-sizing: border-box;
@@ -277,12 +282,5 @@ nav {
 
 .mt-3 {
   margin-top: 3rem; }
-
-#map {
-  height: 50vh; }
-
-.centrar {
-  text-align: center; }
-
 
 /*# sourceMappingURL=style.css.map */

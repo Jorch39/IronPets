@@ -53,10 +53,8 @@ router.get('/allPets/:id', (req, res, next) => {
   }) */
  
 });
-
-
 router.post('/send-email', (req, res, next) => {
-  let { email,emailShelter, phone,subject, message } = req.body;
+  let { email, emailShelter,phone,subject, message } = req.body;
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -75,6 +73,27 @@ router.post('/send-email', (req, res, next) => {
   .catch(error => console.log(error));
 });
 
+/* router.post('/send-email', (req, res, next) => {
+  let { email,emailShelter, phone,subject, message } = req.body;
+  console.log(email);
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'ironpetsmexico@gmail.com',
+      pass: 'Iron12345678'
+    }
+  });
+  transporter.sendMail({
+    from: '"ironPets 👻" <myawesome@project.com>',
+    to: emailShelter, 
+    subject: subject, 
+    text: message,
+    html: `Alguien está interesado en tu mascota contactalo al email ${email} y al telefono ${phone}<b>${message}</b>`
+  })
+  .then(info => res.render('message', {email, subject, message, info}))
+  .catch(error => console.log(error));
+});
+ */
 router.get('/findPets', (req, res, next) => {
 
   res.render('findPets', {user: req.session.user});
@@ -143,21 +162,21 @@ router.post("/signup2", (req, res, next) => {
       }else{
         const newUser = new User ({name, lastname,email, phone, role,password: hashPass});
 
-       /*  User.create({
+         User.create({
           name, 
           lastname,
           email,
           phone,
           role,
           password: hashPass
-        }) */
-  /*       newUser.save()
+        }) 
+        newUser.save()
         .then(() => {
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
-        }) */
+        }) 
       }
       
   })
