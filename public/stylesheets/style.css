@@ -231,4 +231,8 @@ nav {
 .centrar {
   text-align: center; }
 
+.map {
+  height: 80vh;
+  margin-top: 10em; }
+
 /*# sourceMappingURL=style.css.map */
