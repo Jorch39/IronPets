@@ -14,6 +14,9 @@ const session      = require("express-session");
 const bcrypt       = require("bcrypt");
 const passport     = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const FacebookStrategy  =     require('passport-facebook').Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
 //const router = express.Router();
 const MongoStore = require("connect-mongo")(session);
 
@@ -46,6 +49,36 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_APP_ID,
+      clientSecret: process.env.GOOGLE_APP_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // to see the structure of the data in received response:
+      console.log("Google account details:", profile);
+
+      User.findOne({ googleID: profile.id })
+        .then(user => {
+          if (user) {
+            done(null, user);
+            return;
+          }
+
+          User.create({ googleID: profile.id })
+            .then(newUser => {
+              done(null, newUser);
+            })
+            .catch(err => done(err)); // closes User.create()
+        })
+        .catch(err => done(err)); // closes User.findOne()
+    }
+  )
+);
+
 
 passport.serializeUser((user, cb) => {
   cb(null, user._id);

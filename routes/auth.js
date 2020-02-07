@@ -5,6 +5,7 @@ const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
 const nodemailer = require('nodemailer')
 const uploadCloud = require('../config/cloudinary.js');
+const passport     = require("passport");
 
 
 //Models
@@ -13,14 +14,26 @@ const Pet = require("../models/Pet");
 
 
 router.get("/", (req, res, next) => {
-  res.render("index");
+  Pet.find()
+  .then(allPets =>{
+    const chosenPets = [];
+    chosenPets.push(allPets.splice(Math.floor(Math.random()*allPets.length), 1)[0])
+    chosenPets.push(allPets.splice(Math.floor(Math.random()*allPets.length), 1)[0])
+    chosenPets.push(allPets.splice(Math.floor(Math.random()*allPets.length), 1)[0])
+    
+    res.render('index', {user: req.session.user, chosenPets})
+    //console.log(allPets)
+  })
 });
 
 
 router.get('/allPets', (req, res, next) => {
   Pet.find()
   .then(allPets =>{
-    res.render('allPets', {allPets : allPets})
+
+    res.render('allPets', {user: req.session.user, allPets : allPets})
+    //console.log(allPets)
+
   })
 });
 
@@ -30,14 +43,15 @@ router.get('/allPets/:id', (req, res, next) => {
   Pet.findById(req.params.id)
   .populate("shelter")
   .then(pet =>{
-    res.render('detail-pet', {petDetails : pet})
+
+    console.log(pet);
+    res.render('detail-pet', {user: req.session.user, petDetails : pet})
+
   })
   .catch(err => console.log(err))
 });
-
-
 router.post('/send-email', (req, res, next) => {
-  let { email,emailShelter, phone,subject, message } = req.body;
+  let { email, emailShelter,phone,subject, message } = req.body;
   let transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -56,18 +70,43 @@ router.post('/send-email', (req, res, next) => {
   .catch(error => console.log(error));
 });
 
+/* router.post('/send-email', (req, res, next) => {
+  let { email,emailShelter, phone,subject, message } = req.body;
+  console.log(email);
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'ironpetsmexico@gmail.com',
+      pass: 'Iron12345678'
+    }
+  });
+  transporter.sendMail({
+    from: '"ironPets 👻" <myawesome@project.com>',
+    to: emailShelter, 
+    subject: subject, 
+    text: message,
+    html: `Alguien está interesado en tu mascota contactalo al email ${email} y al telefono ${phone}<b>${message}</b>`
+  })
+  .then(info => res.render('message', {email, subject, message, info}))
+  .catch(error => console.log(error));
+});
+ */
 router.get('/findPets', (req, res, next) => {
+
+  res.render('findPets', {user: req.session.user});
+
   User.find({ "role":"Refugio"})
   .then(userRefugio =>{
-    res.render('findPets', {listRefugio : userRefugio})
+    res.render('findPets', {user: req.session.user, listRefugio : userRefugio})
   })
   .catch(err =>{console.log(err)});
  
+
 });
 
 //SignUp
 router.get("/signup2", (req, res, next) => {
-  res.render("signUp2");
+  res.render("signUp2", {user: req.session.user});
 });
 
 router.post("/signup2", (req, res, next) => {
@@ -109,10 +148,22 @@ router.post("/signup2", (req, res, next) => {
         const newUser = new User ({name, lastname,email, phone, role, location,password: hashPass});
         newUser.save()
         .then((newUSer) => {
+      User.create({
+          name, 
+          lastname,
+          email,
+          phone,
+          role,
+          password: hashPass
+        }) 
+        newUser.save()
+        .then(() => {
+
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
+
         })
      }
       
@@ -127,7 +178,7 @@ router.get("/login", (req, res, next) => {
   if(req.session.user){
     return res.redirect('/overview');
   }
-  res.render("login", { "message": req.flash("error") });
+  res.render("login", { user: req.session.user, "message": req.flash("error") });
 });
 
 router.post("/login", (req, res, next) => {
@@ -178,6 +229,7 @@ router.use((req, res, next) => {
 }); // ------------------------------------                                
 //     | 
 //     V
+//* este me redirecciona a overview 
 router.get("/overview", (req, res, next) => {
   const idUser = req.session.user.id;
   console.log(idUser)
@@ -188,6 +240,7 @@ router.get("/overview", (req, res, next) => {
    })
    .catch(err => console.log("And error ocurred x.x"))
 });
+
 
 router.get('/overview/addPet', (req,res) =>{
   res.render('overview/formPet', {user: req.session.user})
@@ -215,5 +268,9 @@ router.get("/logout", (req, res, next) => {
     res.redirect("/login");
   });
 });
+
+
+
+
 
 module.exports = router;
