@@ -207,6 +207,12 @@ router.post("/login", (req, res, next) => {
   })
 });
 
+
+
+// router.get("/overview", ensureLogin.ensureLoggedIn(), (req, res) => {
+//   res.render("myPetList", { user: req.user });
+// });
+
 router.use((req, res, next) => {
   if (req.session.currentUser) { // <== if there's user in the session (user is logged in)
     next(); // ==> go to the next route ---
@@ -239,7 +245,7 @@ router.post('/overview/addPet', uploadCloud.single('photo'), (req,res,next) =>{
   const {name, specie, age, size, sterilized, shelter} = req.body;
   const petPath = req.file.url;
   const petImgName = req.file.originalname;
-  const newPet =  new Pet({name, specie, age, size,sterilized, status:"Disponibe", petPath, petImgName, shelter:user.id});
+  const newPet =  new Pet({name, specie, age, size,sterilized, status:"Disponible", petPath, petImgName, shelter:user.id});
    newPet.save()
   .then(pet =>{
     console.log("New pet succefully added");

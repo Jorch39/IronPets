@@ -13,7 +13,7 @@
     <p>Edad:{{petDetails.age}}</p>
     <p>Tamaño: {{petDetails.size}}</p>
     <p>ironSaver/Refugio: {{petDetails.shelter.role}}</p>
-    <button class="btn btn-primary" id="formButton">Adoptar</button>
+    <button class="ver-mas-card" id="formButton">Adoptar</button>
 
     <form id="form1" action="/send-email" method="post" class='text-center text-muted mb-4 p-4'>
     <p class=' pl-4 pr-4 h5 mb-4'>Escríbe un mensaje al dueño para que sepa que estas interesado en adoptar a {{petDetails.name}}</p>
@@ -30,7 +30,7 @@
       <div class='form-group mb-2'>
         <textarea type="text" name="message" id="" placeholder="Escribe aquí tu mensaje"> </textarea>
       </div>
-      <button type="submit">Adoptar</button>
+      <button class='ver-mas-card' type="submit">Enviar</button>
     </form>
   </div>
 </div>
