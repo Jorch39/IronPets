@@ -17,10 +17,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const FacebookStrategy  =     require('passport-facebook').Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
-//const router = express.Router();
 const MongoStore = require("connect-mongo")(session);
 
-mongodb://localhost/basic-auth
 mongoose.Promise = Promise;
 mongoose
   .connect('mongodb+srv://userAdminJp:ironpets923@cluster0-o48uv.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true,  useUnifiedTopology: true})
@@ -107,7 +105,6 @@ hbs.registerHelper('json', function(context) {
 });
 
 
-// default value for title local
 app.locals.title = 'IronPets';
 
 const userRoutes = require('./routes/userRoutes');
