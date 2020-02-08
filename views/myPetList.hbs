@@ -1,16 +1,24 @@
 {{!< layout}}
-<div class="row">
-  <div class="col-12 overview-pets"><h1></h1>
-  <h1 class='pl-3'>¡Bienvenido {{user.name}}!</h1>
-
-    <h4 class='h5'>Estas son las mascotas que has dado en adopción</h4>
-      <a href="/overview/addPet" class="button">Dar en adopción</a>
-     <div class= 'cards-container' >
-	  {{#each petList}}
-	    {{> petCard this }}
-	  {{/each}} 
-	</div>
-
+<div class='container my-pet-list'>
+  <div class="row">
+    <div class='col-md-6 overview-pets'>
+      <h2 class='pl-3'>¡Bienvenido {{user.name}}!</h2>
+      <h4 class='h5'>Estas son las mascotas que has dado en adopción</h4>
+    </div>
+    <div class ='col-md-2'>
+    </div>
+    <div class='col-md-4 ver-mas-overview'>
+      <a href="/overview/addPet" class="button ver-mas">Dar en adopción</a>
+    </div>
   </div>
 
+  <div class='row'>
+    <div class="col-12 overview-pets">
+      <div class= 'cards-container' >
+      {{#each petList}}
+        {{> petCard this }}
+      {{/each}} 
+      </div>
+    </div>
+  </div>
 </div>
