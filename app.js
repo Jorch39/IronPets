@@ -24,7 +24,6 @@ mongodb://localhost/basic-auth
 mongoose.Promise = Promise;
 mongoose
   .connect('mongodb+srv://userAdminJp:ironpets923@cluster0-o48uv.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true,  useUnifiedTopology: true})
-  //.connect('mongodb://localhost/ironPets', {useNewUrlParser: true,  useUnifiedTopology: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -111,9 +110,6 @@ hbs.registerHelper('json', function(context) {
 // default value for title local
 app.locals.title = 'IronPets';
 
-
-
-//const index = require('./routes/index');
 const userRoutes = require('./routes/userRoutes');
 
 const router = require('./routes/auth');
@@ -121,10 +117,6 @@ const router = require('./routes/auth');
 app.use('/', router);
 
 app.use('/userRotes', userRoutes);
-
-
-
-//app.listen(5000, () => console.log("Server ready, happy code :3"))
 
 
 module.exports = app;

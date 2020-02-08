@@ -1,45 +1,15 @@
 {{!< layout}}
-<div class="row">
-    <div class="col-md-6">
+<div class="row map justify-content-md-center">
+    <div class=" col-lg-10 col-md-10 col-sm-5 " >
+            <h2>Ubica tu refugio más cercano!!! </h2>
             <div id="map" class="centrar"></div>
     </div>
 </div>
 
 {{#each listRefugio}}
-
 {{/each}} 
         
 <script>
-     let arrayRefugio = {{{json listRefugio}}};
-      const mostrarPosicion = posicion =>{
-         let pos = posicion;
-         
-        var coordenadas = {
-            lat: posicion[0], 
-            lng: posicion[1]
-        };
-        console.log('pos'+coordenadas.lat)
-        mostrarMapa(coordenadas)
-    }
+     var arrayRefugio = {{{json listRefugio}}}
     
-      let showPines = (array) =>{
-        array.map( elem=>{
-            console.log(elem.location);
-            mostrarPosicion(elem.location.coordinates);
-        })
-    }
-      const mostrarMapa = (coordenadas) => {
-        console.log("mostrar mapa")
-        let map = new google.maps.Map($('#map')[0], {
-        zoom: 17,
-        center: coordenadas
-        });
-        var marker = new google.maps.Marker({
-        position: coordenadas,
-        map: map
-        });
-    }
-        showPines(arrayRefugio);
-
-   
 </script>

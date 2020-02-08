@@ -30,10 +30,11 @@ router.get("/", (req, res, next) => {
 router.get('/allPets', (req, res, next) => {
   Pet.find()
   .then(allPets =>{
+
     res.render('allPets', {user: req.session.user, allPets : allPets})
     //console.log(allPets)
+
   })
-  //res.render('allPets');
 });
 
 router.get('/allPets/:id', (req, res, next) => {
@@ -42,16 +43,12 @@ router.get('/allPets/:id', (req, res, next) => {
   Pet.findById(req.params.id)
   .populate("shelter")
   .then(pet =>{
+
     console.log(pet);
     res.render('detail-pet', {user: req.session.user, petDetails : pet})
+
   })
   .catch(err => console.log(err))
-   /*  Pet.find()
-  .then(allPets =>{
-    res.render('allPets', {allPets : allPets})
-    console.log(allPets)
-  }) */
- 
 });
 router.post('/send-email', (req, res, next) => {
   let { email, emailShelter,phone,subject, message } = req.body;
@@ -96,7 +93,7 @@ router.post('/send-email', (req, res, next) => {
  */
 router.get('/findPets', (req, res, next) => {
 
-  res.render('findPets', {user: req.session.user});
+ // res.render('findPets', {user: req.session.user});
 
   User.find({ "role":"Refugio"})
   .then(userRefugio =>{
@@ -120,7 +117,6 @@ router.post("/signup2", (req, res, next) => {
     };
     
   const {name, lastname,email,phone,password,role} = req.body;
-  console.log(req.body);
   const salt     = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 
@@ -131,9 +127,9 @@ router.post("/signup2", (req, res, next) => {
     return;
   }
     
-  User.findOne({ "email": email })
-  .then(user => {
-    if (user !== null) {
+    User.findOne({ "email": email })
+    .then(user => {
+      if (user !== null) {
         res.render("signUp2", {
           errorMessage: "The email already exists!"
         });
@@ -141,48 +137,27 @@ router.post("/signup2", (req, res, next) => {
       }
       if(role==="Refugio"){
         const newUser = new User ({name, lastname,email, phone, role, location,password: hashPass});
-        console.log(newUser)
-     /*    User.create({
-          name, 
-          lastname,
-          email,
-          phone,
-          role,
-          direction,
-          
-        }) */
         newUser.save()
         .then((newUSer) => {
-          console.log(req.user)
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
         })
       }else{
-        const newUser = new User ({name, lastname,email, phone, role,password: hashPass});
-
-         User.create({
-          name, 
-          lastname,
-          email,
-          phone,
-          role,
-          password: hashPass
-        }) 
+        const newUser = new User ({name, lastname,email, phone, role:"ironSaver",password: hashPass});
         newUser.save()
-        .then(() => {
+        .then((newUSer) => {
           res.redirect("/overview");
         })
         .catch(error => {
           console.log(error);
-        }) 
+        })
       }
-      
-  })
-  .catch(error => {
-    next(error);
-  });
+    })
+    .catch(error => {
+      next(error);
+    });
 });
 
 //Login
@@ -192,17 +167,6 @@ router.get("/login", (req, res, next) => {
   }
   res.render("login", { user: req.session.user, "message": req.flash("error") });
 });
-
-// router.get("/login", (req, res, next) => {
-//   res.render("login");
-// });
-
-// router.post("/login", passport.authenticate("local", {
-//   successRedirect: "/",
-//   failureRedirect: "/login",
-//   failureFlash: true,
-//   passReqToCallback: true
-// }));
 
 router.post("/login", (req, res, next) => {
   const theEmail = req.body.email;
@@ -214,10 +178,8 @@ router.post("/login", (req, res, next) => {
     });
     return;
   }
-
   User.findOne({ "email": theEmail })
   .then(user => {
-
       if (!user) {
         res.render("login", {
           errorMessage: "The email doesn't exist."
@@ -246,10 +208,10 @@ router.post("/login", (req, res, next) => {
 });
 
 
+
 // router.get("/overview", ensureLogin.ensureLoggedIn(), (req, res) => {
 //   res.render("myPetList", { user: req.user });
 // });
-
 
 router.use((req, res, next) => {
   if (req.session.currentUser) { // <== if there's user in the session (user is logged in)

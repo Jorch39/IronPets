@@ -248,8 +248,13 @@ nav {
 
 .carousel-pets {
   text-align: center;
+
   margin: 50px 0px;
   padding: 30px 200px; }
+}
+  /*  margin: 80px 200px;
+  padding: 50px; */ 
+
 
 .carousel-pets h2 {
   font-size: 40px; }
@@ -286,6 +291,10 @@ nav {
 
 .centrar {
   text-align: center; }
+
+.map {
+  height: 80vh;
+  margin-top: 10em; }
 
 .loginBtn {
   box-sizing: border-box;

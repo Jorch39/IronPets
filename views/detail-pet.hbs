@@ -17,7 +17,6 @@
 
     <form id="form1" action="/send-email" method="post" class='text-center text-muted mb-4 p-4'>
     <p class=' pl-4 pr-4 h5 mb-4'>Escríbe un mensaje al dueño para que sepa que estas interesado en adoptar a {{petDetails.name}}</p>
-    {{!-- <p>Llena el siguiente formulario para que se puedan poner en contacto contigo</p> --}}
       <div class="form-group mb-2">
         <input type="hidden" name="emailShelter" id="" value="{{petDetails.shelter.email}}">
         <input type="email" name="email" id="" value="" placeholder="Correo electrónico">
