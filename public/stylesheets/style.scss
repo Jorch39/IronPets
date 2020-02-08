@@ -44,6 +44,12 @@ p {
   padding: 0 15px;
   font-size: 1.1em;
 }
+.nav-item:hover{
+  color:#F7B500;
+  text-decoration: none;
+  padding: 0 15px;
+  font-size: 1.1em;
+}
 
 .login-item {
   padding-right: 15px;
@@ -174,7 +180,7 @@ nav {
 
 #form button {
   background: #F7B500;
-  border: 1px solid #43a3e6;
+  border: 1px solid #F7B500;
   border-radius: 4px;
   color: black;
   cursor: pointer;
@@ -203,6 +209,8 @@ nav {
 }
 
 #form button:hover {
+  border: 1px solid #43a3e6;
+
   background: #fff;
   color: #43a3e6;
   transition: .3s ease background;
@@ -218,7 +226,7 @@ nav {
 
 .ver-mas {
   background: #F7B500;
-  border: 1px solid #43a3e6;
+  border: 1px solid #F7B500;;
   border-radius: 4px;
   color: black;
   cursor: pointer;
@@ -232,12 +240,15 @@ nav {
 }
 
 .ver-mas:hover {
+  text-decoration: none;
   background: #fff;
   color: #43a3e6;
   transition: .3s ease background;
 }
 
 .ver-mas:hover {
+  border: 1px solid #43a3e6;;
+
   background: #fff;
   color: #43a3e6;
   transition: .3s ease background;
@@ -245,7 +256,7 @@ nav {
 
 .ver-mas-card {
   background: #F7B500;
-  border: 1px solid #43a3e6;
+  border: 1px solid #F7B500;;
   border-radius: 4px;
   color: black;
   cursor: pointer;
@@ -261,6 +272,8 @@ nav {
 .ver-mas-card:hover {
   background: #fff;
   color: #43a3e6;
+  border: 1px solid #43a3e6;
+
   transition: .3s ease background;
 }
 
@@ -352,7 +365,7 @@ margin: 100px;
 
 .footer-pets {
   color: white;
-  width: 1300px;
+  width: 100%;
   background-color: #32407B;
   height: 70px;
   align-items: center;
