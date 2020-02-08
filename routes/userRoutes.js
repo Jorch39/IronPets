@@ -4,13 +4,6 @@ const ensureLogin = require("connect-ensure-login");
 const User = require("../models/User");   // User model
 
 
-// router.get('/allPets', (req, res, next) => {
-//   res.render('allPets');
-// });
-
-// router.get('/findPets', (req, res, next) => {
-//   res.render('findPets');
-// });
 
 router.use((req, res, next) => {
   if (req.session.currentUser) { // <== if there's user in the session (user is logged in)

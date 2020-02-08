@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt         = require("bcrypt"); // BCrypt to encrypt passwords
+const bcrypt         = require("bcrypt"); 
 const bcryptSalt     = 10;
 const ensureLogin = require("connect-ensure-login");
 const nodemailer = require('nodemailer')
@@ -9,7 +9,7 @@ const passport     = require("passport");
 
 
 //Models
-const User = require("../models/User");   // User model
+const User = require("../models/User");
 const Pet = require("../models/Pet");
 
 
@@ -22,7 +22,6 @@ router.get("/", (req, res, next) => {
     chosenPets.push(allPets.splice(Math.floor(Math.random()*allPets.length), 1)[0])
     
     res.render('index', {user: req.session.user, chosenPets})
-    //console.log(allPets)
   })
 });
 
@@ -32,7 +31,6 @@ router.get('/allPets', (req, res, next) => {
   .then(allPets =>{
 
     res.render('allPets', {user: req.session.user, allPets : allPets})
-    //console.log(allPets)
 
   })
 });
@@ -70,30 +68,7 @@ router.post('/send-email', (req, res, next) => {
   .catch(error => console.log(error));
 });
 
-/* router.post('/send-email', (req, res, next) => {
-  let { email,emailShelter, phone,subject, message } = req.body;
-  console.log(email);
-  let transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-      user: 'ironpetsmexico@gmail.com',
-      pass: 'Iron12345678'
-    }
-  });
-  transporter.sendMail({
-    from: '"ironPets 👻" <myawesome@project.com>',
-    to: emailShelter, 
-    subject: subject, 
-    text: message,
-    html: `Alguien está interesado en tu mascota contactalo al email ${email} y al telefono ${phone}<b>${message}</b>`
-  })
-  .then(info => res.render('message', {email, subject, message, info}))
-  .catch(error => console.log(error));
-});
- */
 router.get('/findPets', (req, res, next) => {
-
- // res.render('findPets', {user: req.session.user});
 
   User.find({ "role":"Refugio"})
   .then(userRefugio =>{
@@ -104,7 +79,7 @@ router.get('/findPets', (req, res, next) => {
 
 });
 
-//SignUp
+
 router.get("/signup2", (req, res, next) => {
   res.render("signUp2", {user: req.session.user});
 });
@@ -187,8 +162,6 @@ router.post("/login", (req, res, next) => {
         return;
       }
       if (bcrypt.compareSync(thePassword, user.password)) {
-        console.log(user)
-        // Save the login in the session!
         req.session.currentUser = user;
         req.session.user = {
           email: user.email,
@@ -208,10 +181,6 @@ router.post("/login", (req, res, next) => {
 });
 
 
-
-// router.get("/overview", ensureLogin.ensureLoggedIn(), (req, res) => {
-//   res.render("myPetList", { user: req.user });
-// });
 
 router.use((req, res, next) => {
   if (req.session.currentUser) { // <== if there's user in the session (user is logged in)
