@@ -226,6 +226,7 @@ router.get("/overview", (req, res, next) => {
    .catch(err => console.log("And error ocurred x.x"))
 
 });
+
 router.get('/overview/addPet', (req,res) =>{
   res.render('overview/formPet', {user: req.session.user})
 })
@@ -245,7 +246,13 @@ router.post('/overview/addPet', uploadCloud.single('photo'), (req,res,next) =>{
   })
   .catch(err => console.log(err)); 
 })
-
+router.get('/findPets', (req,res) =>{
+  User.find({ "role": "Refugio" })
+  .then(refugios =>{
+    consolelog(refugios)
+  })
+  res.render('findPets');
+})
 router.get("/logout", (req, res, next) => {
   req.session.destroy((err) => {
     // cannot access session here
